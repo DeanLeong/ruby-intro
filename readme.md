@@ -466,3 +466,7 @@ Like anything else, you will only learn if you _do_ it. [Start doing!](https://g
 - Why is Ruby awesome?
 - What are some differences between Ruby and Javascript?
   - Where can they each run? What are the differences between Ruby objects and JS object?  Ruby methods and JS methods?
+
+---
+
+![](ari-jason.png)
