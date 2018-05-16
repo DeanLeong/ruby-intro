@@ -39,7 +39,7 @@ Just run `ruby FILENAME.rb`.  You can also run [`pry`](http://pryrepl.org/) this
 
 ## Numbers
 
-Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.1.0/Numeric.html) class.  It's subclasses include [`Fixnum`](https://ruby-doc.org/core-2.1.0/Fixnum.html) and [`Float`](https://ruby-doc.org/core-2.1.0/Float.html)
+Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.1.0/Numeric.html) class.  It's subclasses include [`Integer`](https://ruby-doc.org/core-2.5.1/Integer.html) and [`Float`](https://ruby-doc.org/core-2.5.1/Float.html)
 
 ```ruby
 1.class # => Fixnum
@@ -54,14 +54,14 @@ Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.1.0/Numeric.h
 
 ## Strings
 
-A [`String`](https://ruby-doc.org/core-2.1.0/String.html) in Ruby is similar to strings in JS.
+A [`String`](https://ruby-doc.org/core-2.5.1/String.html) in Ruby is similar to strings in JS.
 
 ```ruby
 'foo'.length # => 3
 'foo'.include?('o') # => true
 ```
 
-> In ruby the convention is to use `?` for predicate methods. (in JS we use verbs like `is` or `did`)
+> In ruby the convention is to use `?` for methods that return true or false (rhymes with Conneticut) . (in JS we use verbs like `is` or `did`)
 
 However, strings are **mutable** (unlike in JS)
 
@@ -74,7 +74,7 @@ str.upcase! # => 'FOO'
 str # => 'FOO' (upcase! DOES mutate str)
 ```
 
-There is nothing magic about having a `!` at the end of a method but it is often used for "dangerous" operations
+There is nothing magic about having a `!` at the end of a method but it is often used for "dangerous" operations --unclear--
 
 ### Interpolation
 
@@ -93,21 +93,21 @@ You can also concatenate strings but this is NOT recommend
 
 ```ruby
 'foo' + 'bar' # => 'foobar'
-'foo' + 2 # => TypeError: no implicit conversion of Fixnum into String
+'foo' + 2 # => TypeError: no implicit conversion of Integer into String
 'foo' + 2.to_s # => 'foo2'
 ```
 
-Above we see that we canNOT implicitly convert a non-string into a string (unlike what we have seen in JS).
+Above we see that we can NOT implicitly convert a non-string into a string (unlike what we have seen in JS).
 
 
 Use single quotes for strings that are not interpolated
 
-> Warning: Backticks are *not* used for strings! They are used to execute commands. (`echo hello world`)
+> Warning: Backticks are *not* used for strings! They are used to execute commands. (`echo hello world`) --more info--
 
 
 ## Symbols
 
-A [Symbol](https://ruby-doc.org/core-2.2.0/Symbol.html) is similar to a `String`.  It cannot be mutated or manipulated.  It is used represent _things_ rather than _text_.  Symbols start with `:`.
+A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`.  It cannot be mutated or manipulated.  It is used represent _things_ rather than _text_.  Symbols start with `:`.
 
 ```ruby
 :foo # => :foo
@@ -150,31 +150,31 @@ So unlike JS `0` and `''` are truthy.  (There is no `null`, `undefined`, `NaN`, 
 !! 0 # => true
 !! '' # => true
 ```
-
+--what is the double bang?--
 ## Arrays
 
-A Ruby [`Array`](https://ruby-doc.org/core-2.2.0/Array.html) is similar to a JS Array.
+A Ruby [`Array`](https://ruby-doc.org/core-2.5.1/Array.html) is similar to a JS Array.
 
 ```ruby
-arr = [:stacey, :tracey, :lacey, :macey]
+arr = [:Gustave, :Sandrine, :Delphine, :Maurice]
 arr.length # => 4
 
-arr.first # => :stacey
-arr.last # => :macey
-arr[1] # => :tracey
+arr.first # => :Gustave
+arr.last # => :Maurice
+arr[1] # => :Sandrine
 arr[100] # => nil
 
-arr.include?(:tracey) # => true
+arr.include?(:Sandrine) # => true
 
-arr.push(:jackie) # => [:stacey, :tracey, :lacey, :macey, :jackie]
-arr               # => [:stacey, :tracey, :lacey, :macey, :jackie]
+arr.push(:Clementine) # => [:Gustave, :Sandrine, :lacey, :Maurice, :Clementine]
+arr               # => [:Gustave, :Sandrine, :lacey, :Maurice, :Clementine]
 ```
 
 To get the last few elements we can use negative indexes
 
 ```ruby
-arr[-1] # => :jackie
-arr[-2] # => :macey
+arr[-1] # => :Clementine
+arr[-2] # => :Maurice
 ```
 
 We can also concatenate arrays
@@ -186,32 +186,32 @@ We can also concatenate arrays
 
 ## Hashes
 
-A [`Hash`](https://ruby-doc.org/core-2.2.0/Hash.html) is similar to a JS object.
+A [`Hash`](https://ruby-doc.org/core-2.5.1/Hash.html) is similar to a JS object.
 
 ```ruby
-ari = { 'name' => 'Ari', 'age' => 24 }
-ari['name'] # => 'Ari'
-ari['foo'] # => nil
+gustave = { 'name' => 'Gustave', 'age' => 2.5 }
+gustave['name'] # => 'Gustave'
+gustave['foo'] # => nil
 ```
 
-We ONLY use bracket notation to get and set values
+We use ONLY gustavebracket notation to get and set values
 
 ```ruby
-ari['age'] # => 24
-ari.age # => NoMethodError: undefined method `age' for Hash
+gustave['age'] # => 2.5
+gustave.age # => NoMethodError: undefined method `age' for Hash
 
-ari['age'] = 25
-ari['age'] # => 25
+gustave['age'] = 10
+gustave['age'] # => 10
 
-ari.age = 25 # => NoMethodError: undefined method `age=' for Hash
+gustave.age = 25 # => NoMethodError: undefined method `age=' for Hash
 ```
 
 By convention, `Hash` keys are usually `Symbol`s not `String`s
 
 ```ruby
-ari = { :name => 'Ari', :age => 24 }
-ari[:name] # => 'Ari'
-ari['name'] # => nil
+gustave = { :name => 'Gustave', :age => 24 }
+gustave[:name] # => 'Gustave'
+gustave['name'] # => nil
 ```
 
 Since using symbols as keys is so common, there is a nice short-hand
@@ -219,7 +219,7 @@ Since using symbols as keys is so common, there is a nice short-hand
 This is exactly the same as what we saw above.
 
 ```ruby
-ari = { name: 'Ari', age: 24 }
+gustave = { name: 'Gustave', age: 24 }
 ```
 
 Notice that is looks exactly like a JS object except the keys are symbols, not strings.
@@ -290,7 +290,7 @@ end
 
 ## Methods
 
-In Ruby everything is a [`Method`](https://ruby-doc.org/core-2.2.0/Method.html).  There are NO functions!
+In Ruby everything is a [`Method`](https://ruby-doc.org/core-2.5.1/Method.html).  There are NO functions! --huh--
 
 
 ```ruby
@@ -335,15 +335,15 @@ def say_hi(name = 'World')
   puts "Hello, #{name}!"
 end
 
-say_hi('Stacey')
-# > Hello, Stacey!
+say_hi('Gustave')
+# > Hello, Gustave!
 say_hi
 # > Hello, World!
 ```
 
 We called the method without using parens!
 
-### Bonus: [defining methods that `yield` blocks](https://git.generalassemb.ly/wdi-nyc-hamilton/LECTURE_U04_D01_Ruby_101/blob/master/blocks.md)
+### Bonus: [defining methods that `yield` blocks](blocks.md)
 
 
 
@@ -381,6 +381,7 @@ puts 'you are old!' unless age < 100
 When you see an `unless foo`, read it as `if !foo`
 
 > Only use `unless` if the condition cannot be written as a positive (without a `!`).
+--find use case for unless according to above--
 
 #### Ternary operator  
 
@@ -418,7 +419,7 @@ false || nil # => nil (falsy)
 
 ## Error-handling
 
-Ruby we have `raise` to throw errors `rescue` to catch them.
+In Ruby we have `raise` to throw errors and `rescue` to catch them.
 
 These are most common when using and creating external APIs but probably don't need to be used in your own internal code.
 
@@ -428,7 +429,7 @@ If you are interested flex your google muscles and learn it on your own ;)
 
 Constants in Ruby always start with a capital letter.  Every `Class` is constant (Like `String` and `Numeric`).  Constants cannot be reassigned.
 
-> Do not treat constants like ES's `const`.  Do not create constant variables inside of methods.  Use them only for classes/modules and for [class constants](https://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html)
+> Do not treat constants like ES6's `const`.  Do not create constant variables inside of methods.  Use them only for classes/modules and for [class constants](https://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html)
 
 ## Style Things
 
@@ -459,7 +460,7 @@ Here are the most important rules
 * **Do** use `attr_reader` and `attr_writer`
 * Do not use parens when calling a method without args
   * `super` is one possible exception
-* **Do** use parens for every method except for DSLs (and a small list of other common methods)
+* **Do** use parens for every method except for DSLs--huh-- (and a small list of other common methods)
   * `attr_reader`, `puts`, `require`, `include`, `it`, `has_many`, ...
 
 **Other stuff**
@@ -474,7 +475,7 @@ Here are the most important rules
 
 ## Note about Sigils
 
-JS does not has Sigils.  In ruby, starting a variable with a sigil (`@`, `@@`, `$`, `:`, or a capital letter) affects the compiler.
+JS does not have Sigils.  In ruby, starting a variable with a sigil (`@`, `@@`, `$`, `:`, or a capital letter) affects the compiler.
 
 Instance variable | Class variable | Global variable | Symbol | Constant
 --- | --- | --- | --- | ---
@@ -502,4 +503,3 @@ Like anything else, you will only learn if you _do_ it. [Start doing!](https://g
 
 ---
 
-![](ari-jason.png)
