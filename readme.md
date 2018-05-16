@@ -461,7 +461,7 @@ Here are the most important rules
 * **Do** use `attr_reader` and `attr_writer`
 * Do not use parens when calling a method without args
   * `super` is one possible exception
-* **Do** use parens for every method except for DSLs--huh-- (and a small list of other common methods)
+* **Do** use parens for every method except for DSLs (and a small list of other common methods)
   * `attr_reader`, `puts`, `require`, `include`, `it`, `has_many`, ...
 
 **Other stuff**
