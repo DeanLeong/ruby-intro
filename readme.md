@@ -39,7 +39,7 @@ Just run `ruby FILENAME.rb`.  You can also run [`pry`](http://pryrepl.org/) this
 
 ## Numbers
 
-Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.1.0/Numeric.html) class.  It's subclasses include [`Integer`](https://ruby-doc.org/core-2.5.1/Integer.html) and [`Float`](https://ruby-doc.org/core-2.5.1/Float.html)
+Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.5.1/Numeric.html) class.  It's subclasses include [`Integer`](https://ruby-doc.org/core-2.5.1/Integer.html) and [`Float`](https://ruby-doc.org/core-2.5.1/Float.html)
 
 ```ruby
 1.class # => Fixnum
@@ -116,7 +116,8 @@ A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`
 :foo == 'foo' # false
 ```
 
-The more you see them the more you will understand the use-case
+The more you see them the more you will understand the use-case.
+  
 
 ## Booleans and `nil`
 
@@ -150,7 +151,7 @@ So unlike JS `0` and `''` are truthy.  (There is no `null`, `undefined`, `NaN`, 
 !! 0 # => true
 !! '' # => true
 ```
---what is the double bang?--
+
 ## Arrays
 
 A Ruby [`Array`](https://ruby-doc.org/core-2.5.1/Array.html) is similar to a JS Array.
@@ -166,8 +167,8 @@ arr[100] # => nil
 
 arr.include?(:Sandrine) # => true
 
-arr.push(:Clementine) # => [:Gustave, :Sandrine, :lacey, :Maurice, :Clementine]
-arr               # => [:Gustave, :Sandrine, :lacey, :Maurice, :Clementine]
+arr.push(:Clementine) # => [:Gustave, :Sandrine, :Delphine, :Maurice, :Clementine]
+arr               # => [:Gustave, :Sandrine, :Delphine, :Maurice, :Clementine]
 ```
 
 To get the last few elements we can use negative indexes
@@ -194,7 +195,7 @@ gustave['name'] # => 'Gustave'
 gustave['foo'] # => nil
 ```
 
-We use ONLY gustavebracket notation to get and set values
+We use ONLY bracket notation to get and set values
 
 ```ruby
 gustave['age'] # => 2.5
