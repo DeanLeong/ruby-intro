@@ -214,7 +214,12 @@ We can also concatenate arrays
 [1, 2, 3] + [4, 5] # => [1, 2, 3, 4, 5]
 # (this is a new array. neither is mutated)
 ```
-
+## Range
+A [`Range`](http://ruby-doc.org/core-2.5.1/Range.html) allows you to define a range of values. You can then turn that range into an array and get all the sweet array methods. This is a great technique to avoid for loops. you can use three dots instead of two for an exclusive range.
+```ruby
+(1..10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+(1...10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9]
+``` 
 ## Hashes
 
 A [`Hash`](https://ruby-doc.org/core-2.5.1/Hash.html) is similar to a JS object.
