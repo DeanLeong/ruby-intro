@@ -31,6 +31,23 @@ It is meant to be pretty, unobtrusive, and super readable.
 
 Ruby does **not** run in the browser.  It is most commonly used for backend web development with frameworks like [Sinatra](http://www.sinatrarb.com/) and [Rails](http://rubyonrails.org/).
 
+## What's Ruby like? 
+
+### M.I.N.A.S.W.A.N.
+
+* "Matz Is Nice And So We Are Nice"
+* Mentality not only applies to how you should treat your fellow developers, but also the philosophy behind Ruby itself.
+* Yukihiro Matsumoto ("Matz") created Ruby to increase developer happiness.
+
+> "Programmers often feel joy when they can concentrate on the creative side of programming, so Ruby is designed to make programmers happy." — Yukihiro "Matz" Matsumoto  
+
+### A **Natural** Language
+
+While it isn't exactly simple, a lot of its features are going to feel intuitive.  
+
+> "Ruby is simple in appearance, but is very complex inside, just like our human body." — Yukihiro "Matz" Matsumoto  
+
+
 ## Running Ruby
 
 Just run `ruby FILENAME.rb`.  You can also run [`pry`](http://pryrepl.org/) this is a Ruby `repl`.
@@ -42,7 +59,7 @@ Just run `ruby FILENAME.rb`.  You can also run [`pry`](http://pryrepl.org/) this
 Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.5.1/Numeric.html) class.  It's subclasses include [`Integer`](https://ruby-doc.org/core-2.5.1/Integer.html) and [`Float`](https://ruby-doc.org/core-2.5.1/Float.html)
 
 ```ruby
-1.class # => Fixnum
+1.class # => Integer
 1.0.class # => Float
 
 2 - 3 # => -1
@@ -74,7 +91,7 @@ str.upcase! # => 'FOO'
 str # => 'FOO' (upcase! DOES mutate str)
 ```
 
-There is nothing magic about having a `!` at the end of a method but it is often used for "dangerous" operations --unclear--
+There is nothing magic about having a `!` at the end of a method but it is often used for "dangerous" operations
 
 ### Interpolation
 
@@ -117,6 +134,19 @@ A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`
 ```
 
 The more you see them the more you will understand the use-case.
+Symbols use memory more efficiently
+```ruby
+string1 = 'hello'
+string2 = 'hello'
+symbol1 = :hello
+symbol2 = :hello
+
+string1.object_id #=> 1234
+string2.object_id #=> 4567
+
+symbol1.object_id #=> 7890
+symbol2.object_id #=> 7890
+```
   
 
 ## Booleans and `nil`
@@ -291,7 +321,7 @@ end
 
 ## Methods
 
-In Ruby everything is a [`Method`](https://ruby-doc.org/core-2.5.1/Method.html).  There are NO functions! --huh--
+In Ruby everything is a [`Method`](https://ruby-doc.org/core-2.5.1/Method.html).  There are NO functions!
 
 
 ```ruby
@@ -381,8 +411,8 @@ puts 'you are old!' unless age < 100
 ```
 When you see an `unless foo`, read it as `if !foo`
 
-> Only use `unless` if the condition cannot be written as a positive (without a `!`).
---find use case for unless according to above--
+> `if !foo` can always be written as `unless foo` which creates a more readable line
+
 
 #### Ternary operator  
 
@@ -402,7 +432,7 @@ while a.positive?
 end
 ```
 
-> There are also `until` loops. Only use `until` if the condition cannot be written as a positive (without a `!`).
+> There are also `until` loops. While is to `until` as `if` is to `unless`
 
 ### Binary operators `&&`/`||`
 
@@ -491,9 +521,9 @@ Like anything else, you will only learn if you _do_ it. [Start doing!](https://g
 
 ## Resources
 
-* [Ruby docs](http://ruby-doc.org/core-2.4.1/)
-  - [`Array`](https://ruby-doc.org/core-2.2.0/Array.html), [`Hash`](https://ruby-doc.org/core-2.2.0/Hash.html), [`String`](https://ruby-doc.org/core-2.2.0/String.html), [`Symbol`](https://ruby-doc.org/core-2.2.0/Symbol.html), [`Numeric`](https://ruby-doc.org/core-2.2.0/Numeric.html),
-  [`Object`](https://ruby-doc.org/core-2.2.0/Object.html), ...
+* [Ruby docs](https://ruby-doc.org/core-2.5.1/)
+  - [`Array`](http://ruby-doc.org/core-2.5.1/Array.html), [`Hash`](http://ruby-doc.org/core-2.5.1/Hash.html), [`String`](http://ruby-doc.org/core-2.5.1/String.html), [`Symbol`](http://ruby-doc.org/core-2.5.1/Symbol.html), [`Numeric`](http://ruby-doc.org/core-2.5.1/Numeric.html),
+  [`Object`](http://ruby-doc.org/core-2.5.1/Object.html), ...
 * [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
 * [Reserved words](http://www.java2s.com/Code/Ruby/Language-Basics/Rubysreservedwords.htm)
 
