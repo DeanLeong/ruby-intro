@@ -510,12 +510,6 @@ Instance variable | Class variable | Global variable | Symbol | Constant
 `@foo` | `@@foo` | `$foo` | `:foo` | `Foo`
 _ivars_. (next lecture) | Research if interested | Research if interested | [Discussed above](#symbols) | [Discussed above](#constants)
 
-## Lab Time!
-
-Ruby is really fun!
-
-Like anything else, you will only learn if you _do_ it. [Start doing!](https://git.generalassemb.ly/wdi-nyc-hamilton/LAB_U04_D01_Ruby_101)
-
 ## Resources
 
 * [Ruby docs](https://ruby-doc.org/core-2.5.1/)
