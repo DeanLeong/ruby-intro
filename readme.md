@@ -1,14 +1,6 @@
----
-title: Ruby 101
-type: lesson
-duration: "2:30"
-creator:
-    name: Ari Brenner
-    city: NY
-competencies: Programming
----
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)  WEB DEVELOPMENT IMMERSIVE
 
-# Ruby 101
+# Ruby
 
 ### Objectives
 *After this lesson, students will be able to:*
