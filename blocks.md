@@ -1,6 +1,6 @@
 ## Defining methods that `yield` blocks
 
-Assume we want to define a method that does a thing with some probably.
+Assume we want to define a method that does a thing with some probability.
 
 For example, if we want something to happen with a 1 in 5 chance, we may want to execute
 
