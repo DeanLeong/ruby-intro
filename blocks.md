@@ -2,7 +2,7 @@
 
 Assume we want to define a method that does a thing with some probably.
 
-For example, if we want to something to happen with a 1 in 5 chance, we may want to execute
+For example, if we want something to happen with a 1 in 5 chance, we may want to execute
 
 ```ruby
 maybe_do_thing(5) { puts '1 in 5 chance!' }
