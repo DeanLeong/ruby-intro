@@ -46,7 +46,7 @@ Just run `ruby FILENAME.rb`.  You can also run [`pry`](http://pryrepl.org/) this
 
 > [`irb`](https://www.tutorialspoint.com/ruby/interactive_ruby.htm) is the official ruby repl but `pry` is much better
 
-## What is a variable?
+## What is a variable in Ruby?
 
 A variable is an identifier that is assigned to an object, and which may hold a value. Ruby variables are not declared, nor are they statically typed. Instead, the type of value is assigned at runtime. Ruby uses duck typing, which is a kind of dynamic typing. If a value behaves or acts like a certain type (duck), such as an integer, Ruby gives it a context and treats it as such (it’s probably a duck). If a variable is able to act like an integer, for example, then it is legal and appropriate to use it in that context.
 
