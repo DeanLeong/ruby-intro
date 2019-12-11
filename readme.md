@@ -62,36 +62,36 @@ price   = 10.25 # => Float
 Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.5.1/Numeric.html) class.  It's subclasses include [`Integer`](https://ruby-doc.org/core-2.5.1/Integer.html) and [`Float`](https://ruby-doc.org/core-2.5.1/Float.html)
 
 ```ruby
-2.6.5 > 1.class
+1.class
  => Integer
-2.6.5 > 1.0.class 
+1.0.class 
  => Float
-2.6.5 > 1+1
+1+1
  => 2 
-2.6.5 > 3-1
+3-1
  => 2 
-2.6.5 > 3*3
+3*3
  => 9 
-2.6.5 > 10/2
+10/2
  => 5 
-2.6.5 > 1 / 2 
+1 / 2 
  => 0 (rounds down)
-2.6.5 > 1 / 2.0 
+1 / 2.0 
  => 0.5 (does not round float)
-2.6.5 > 2.next
+2.next
  => 3 (.next provides the next integer value)
-2.6.5 > 2.pred
+2.pred
  => 1 (.pred provides the preceding integer value)
-2.6.5 > 2.lcm(3)
+2.lcm(3)
  => 6 (.lcm gives us the least common multiple of the integer to which the method is applied and the value passed)
-2.6.5 > 2.gcd(3)
+2.gcd(3)
  => 1 (.gcd provides the greatest common divisor of the integer to which the method is applied and the value passed)
 ```
 
 There are a number of methods available for the integer class, which you can play around with. Simply check them by using .methods on the integer.
 
 ```ruby
-2.6.5 > 2.methods
+2.methods
  => [:-@, :**, :<=>, :upto, :<<, :<=, :>=, :==, :chr, :===, :>>, :[], :%, :&, :inspect, :*, :+, :ord, :-, :/, :size, :succ, :<, :>, :to_int, :coerce, :to_s, :to_i, :to_f, :divmod, :to_r, :fdiv, :modulo, :remainder, :abs, :magnitude, :integer?, :floor, :ceil, :round, :truncate, :^, :odd?, :even?, :allbits?, :anybits?, :nobits?, :downto, :times, :pred, :pow, :bit_length, :digits, :numerator, :denominator, :rationalize, :gcd, :lcm, :gcdlcm, :next, :div, :|, :~, :imag, :abs2, :+@, :phase, :to_c, :polar, :angle, :conjugate, :conj, :eql?, :singleton_method_added, :i, :real?, :zero?, :nonzero?, :finite?, :infinite?, :step, :positive?, :negative?, :clone, :dup, :arg, :quo, :rectangular, :rect, :real, :imaginary, :between?, :clamp, :instance_variable_defined?, :remove_instance_variable, :instance_of?, :kind_of?, :is_a?, :tap, :instance_variable_set, :protected_methods, :instance_variables, :instance_variable_get, :private_methods, :public_methods, :public_send, :method, :public_method, :singleton_method, :define_singleton_method, :extend, :to_enum, :enum_for, :=~, :!~, :respond_to?, :freeze, :object_id, :send, :display, :nil?, :hash, :class, :singleton_class, :itself, :yield_self, :then, :taint, :tainted?, :untaint, :untrust, :untrusted?, :trust, :frozen?, :methods, :singleton_methods, :equal?, :!, :instance_exec, :!=, :instance_eval, :__id__, :__send__] 
 ```
 
@@ -128,19 +128,19 @@ a, b, c = "cash", 1.99, 100
 Ruby has a special object called a symbol. Symbols are like placeholders for identifiers and strings. They are always prefixed by a colon (:); for example, :en and :logos. Only one copy of the symbol is held in a single memory address as long as the program is running. You don’t create a symbol directly by assigning a value to it. You create a symbol by calling the String#to_sym or String#intern methods on a string, or by assigning a symbol to a symbol:
 
 ```ruby
-2.6.5 > name = "Bobby"
+name = "Bobby"
  => "Bobby" 
-2.6.5 > name.to_sym # => :Bobby
+name.to_sym # => :Bobby
  => :Bobby 
-2.6.5 > name.intern # => :Bobby
+name.intern # => :Bobby
  => :Bobby 
-2.6.5 > "Hello".to_sym # => :Hello
+"Hello".to_sym # => :Hello
  => :Hello 
-2.6.5 > :Hello.to_s # => "Hello"
+:Hello.to_s # => "Hello"
  => "Hello" 
-2.6.5 > :Hello.id2name # => "Hello"
+:Hello.id2name # => "Hello"
  => "Hello" 
-2.6.5 > name == :Bobby.to_s # => true
+name == :Bobby.to_s # => true
  => true
 ```
 
@@ -174,18 +174,18 @@ puts @x
 This command prints an empty string and returns nil. (If you try this with a local variable, you’ll get an error; local variables aren’t automatically initialized to anything, not even nil.) nil is also the default value for nonexistent elements of container and collection objects. For example, if you create an array with three elements, and then you try to access the tenth element (at index 9, because array indexing starts at 0), you’ll find that it’s nil:
 
 ```ruby
-2.6.5 > ["one","two","three"][9]
+["one","two","three"][9]
  => nil 
 ```
 
 nil is sometimes a difficult object to understand. It’s all about absence and nonexistence; but nil does exist, and it responds to method calls like other objects:
 
 ```ruby
-2.6.5 > nil.to_s
+nil.to_s
  => "" 
-2.6.5 > nil.to_i
+nil.to_i
  => 0 
-2.6.5 > nil.object_id
+nil.object_id
  => 8 
 ```
 
@@ -199,24 +199,96 @@ Boolean values and testing provide a segue into the next topic: comparisons betw
 
 ## Strings
 
-A [`String`](https://ruby-doc.org/core-2.5.1/String.html) in Ruby is similar to strings in JS.
+A [`String`](https://ruby-doc.org/core-2.6/String.html) in Ruby is similar to strings in JS.
+
+## What is a String?
+A string is a series of text characters. You can use strings to hold names, email addresses, phone numbers, and a million other things. Ruby’s strings are special because even very large strings are highly efficient to work with (this isn’t true in many other languages). Strings in Ruby are derived from the String class, and there are over 100 methods to manipulate and operate on strings. This is perhaps because, in programming, a lot revolves around strings, and Ruby reduces the headache by managing a lot out of the box.
+
+The easiest way to specify a string is to surround it either with double quotes (") or single quotes ('). The two types of quotes work a little differently
+
+- Ruby’s string literal syntax, as well as the String operators for concatenation (+), appends (<<), repetition (*), and indexing ([]).
 
 ```ruby
-'foo'.length # => 3
-'foo'.include?('o') # => true
+s = "hello"
+s.concat(" world") # Synonym for <<. Mutating append to s. Returns new s
+s.insert(5, " there") # Same as s[5] = " there". Alters s. Returns new s
+s.slice(0,5) # Same as s[0,5]. Returns a substring
+s.slice!(5,6) # Deletion. Same as s[5,6]="". Returns deleted substring
+s.eql?("hello world") # True. Same as ==
 ```
 
-> In ruby the convention is to use `?` for methods that return true or false (rhymes with Conneticut) . (in JS we use verbs like `is` or `did`)
-
-However, strings are **mutable** (unlike in JS)
+## There are several methods for querying the length of a string:
 
 ```ruby
-str = 'foo'
-str.upcase # => 'FOO'
+s.length # => 5: counts characters in 1.9, bytes in 1.8
+s.size # => 5: size is a synonym
+s.bytesize # => 5: length in bytes; Ruby 1.9 only
+s.empty? # => false
+"".empty? # => true
+```
 
-str # => 'foo' (upcase does not mutate str)
-str.upcase! # => 'FOO'
-str # => 'FOO' (upcase! DOES mutate str)
+## Finding the position of a substring or pattern match
+-String methods for searching a string and for replacing content include the following:
+
+```ruby
+s = "hello"
+s.index('l') # => 2: index of first l in string
+s.index(?l) # => 2: works with character codes as well
+s.index(/l+/) # => 2: works with regular expressions, too
+s.index('l',3) # => 3: index of first l in string at or after position 3
+s.index('Ruby') # => nil: search string not found
+s.rindex('l') # => 3: index of rightmost l in string
+s.rindex('l',2) # => 2: index of rightmost l in string at or before 2
+```
+
+## Checking for prefixes and suffixes: Ruby 1.9 and later
+```ruby
+s.start_with? "hell" # => true. Note singular "start" not "starts"
+s.end_with? "bells" # => false
+```
+
+## Testing for presence of substring
+```ruby
+s.include?("ll") # => true: "hello" includes "ll"
+s.include?(?H) # => false: "hello" does not include character H
+```
+
+## Pattern matching with regular expressions
+```ruby
+s =~ /[aeiou]{2}/ # => nil: no double vowels in "hello"
+s.match(/[aeiou]/) {|m| m.to_s} # => "e": return first vowel
+```
+
+## Splitting a string into substrings based on a delimiter string or pattern
+```ruby
+"this is it".split # => ["this", "is", "it"]: split on spaces by default
+"hello".split('l') # => ["he", "", "o"]
+"1, 2,3".split(/,\s*/) # => ["1","2","3"]: comma and optional space delimiter
+```
+
+## Split a string into two parts plus a delimiter. Ruby 1.9 only.
+- These methods always return arrays of 3 strings:
+
+```ruby
+"banana".partition("an") # => ["b", "an", "ana"]
+"banana".rpartition("an") # => ["ban", "an", "a"]: start from right
+"a123b".partition(/\d+/) # => ["a", "123", "b"]: works with Regexps, too
+```
+
+## Search and replace the first (sub, sub!) or all (gsub, gsub!)
+- occurrences of the specified string or pattern.
+- More about sub and gsub when we cover regular expressions later.
+```ruby
+s.sub("l", "L") # => "heLlo": Just replace first occurrence
+s.gsub("l", "L") # => "heLLo": Replace all occurrences
+s.sub!(/(.)(.)/, '\2\1') # => "ehllo": Match and swap first 2 letters
+s.sub!(/(.)(.)/, "\\2\\1") # => "hello": Double backslashes for double quotes
+```
+
+## sub and gsub can also compute a replacement string with a block
+- Match the first letter of each word and capitalize it
+```ruby
+"hello world".gsub(/\b./) {|match| match.upcase } # => "Hello World"
 ```
 
 There is nothing magic about having a `!` at the end of a method but it is often used for "dangerous" operations
@@ -315,25 +387,30 @@ So unlike JS `0` and `''` are truthy.  (There is no `null`, `undefined`, `NaN`, 
 A Ruby [`Array`](https://ruby-doc.org/core-2.5.1/Array.html) is similar to a JS Array.
 
 ```ruby
-arr = [:Gustave, :Sandrine, :Delphine, :Maurice]
+arr = ["apple", "mango", "pear", "kiwi"]
 arr.length # => 4
 
-arr.first # => :Gustave
-arr.last # => :Maurice
-arr[1] # => :Sandrine
+arr.first # => "apple"
+arr.last # => "kiwi"
+arr[1] # => "mango"
 arr[100] # => nil
 
-arr.include?(:Sandrine) # => true
+arr.include?("mango") # => true
 
-arr.push(:Clementine) # => [:Gustave, :Sandrine, :Delphine, :Maurice, :Clementine]
-arr               # => [:Gustave, :Sandrine, :Delphine, :Maurice, :Clementine]
+arr.push("orange") # => ["apple", "mango", "pear", "kiwi", "orange"]
+arr                # => ["apple", "mango", "pear", "kiwi", "orange"]
+```
+- Another way to add elements to an array is by means of the << operator. There are operators in Ruby that are aliases to functions or methods, and they are used to achieve the same result, but with shortcuts:
+```ruby
+my_array  = [1,2,3]
+my_array  << 4 # => [1, 2, 3, 4]
 ```
 
 To get the last few elements we can use negative indexes
 
 ```ruby
-arr[-1] # => :Clementine
-arr[-2] # => :Maurice
+arr[-1] # => "orange"
+arr[-2] # => "kiwi"
 ```
 
 We can also concatenate arrays
@@ -342,7 +419,110 @@ We can also concatenate arrays
 [1, 2, 3] + [4, 5] # => [1, 2, 3, 4, 5]
 # (this is a new array. neither is mutated)
 ```
+
+## Iterating over an array
+
+Ruby supports for loops and the other iteration constructs found in most modern programming languages, but its prefered idiom is a code block fed to an method like each or collect.
+
+```ruby
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+numbers.each { |x| p x }
+```
+If you want to produce a new array based on a transformation of some other array, use Enumerable#collect along with a block that takes one element and transforms it:
+```ruby
+numbers = [1,2,3]
+numbers_two = numbers.collect {|x| x+1 }
+p numbers_two
+```
+Methods like each and collect are called generators or iterators: they iterate over a data structure, yielding one element at a time to whatever code block you’ve attached.
+
+If you need to have the array indexes along with the array elements, use Enumerable#each_with_index.
+
+```ruby
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+numbers.each_with_index do |item, index|
+  puts "At position #{index}: #{item}"
+end
+```
+To iterate over a list in reverse order, use the reverse_each method:
+```ruby
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+numbers.reverse_each {|x| puts x }
+```
+ The map method acts just like collect, but instead of creating a new array to hold the return values of its calls to the code block, it replaces each item in the old array with the corresponding value from the code block. This saves memory and time, but it destroys the old array
+```ruby
+students = %w(John Suresh Casey)
+puts students[0].object_id
+puts students.collect! { |x| x.upcase }
+puts students[0].object_id
+puts students.map! { |x| x.downcase }
+puts students[0].object_id
+```
+Like most other programming languages, Ruby lets you define for, while, and until loops—but you shouldn’t need them very often. The for construct is equivalent to each, whether it’s applied to an array or a range:
+```ruby
+students = %w(John Suresh Casey)
+for element in students
+  puts element
+end
+```
+
+```ruby
+students = %w(John Suresh Casey)
+students.each { |element|
+  puts element
+}
+```
+The while and until constructs take a boolean expression and execute the loop while the expression is true (while)or until it becomes true (until). All three of the following code snippets generate the same output:
+```ruby
+names = ['John', 'Suresh', 'Casey']
+
+for index in (0...names.length)
+  puts "At position #{index}: #{names[index]}"
+end
+
+index = 0
+while index < names.length
+  puts "At position #{index}: #{names[index]}"
+  index += 1
+end
+
+index = 0
+until index == names.length
+  puts "At position #{index}: #{names[index]}"
+  index += 1
+end
+```
+- <b>Note</b> These constructs don’t make for very idiomatic Ruby. You should only need to use them when you’re iterating over a data structure in a way that doesn’t already have an iterator method. 
+
+## Creating an array that cannot be modified
+
+- This can come in handy when we want to limit the size of an array or prevent further modification. The freeze function can be used on objects other than arrays with the same result:
+```ruby
+my_array  = [1,2,3]
+my_array.freeze
+my_array << 4 # this will cause an error
+```
+
+## Team Exercises 1 : 30 minutes
+
+```ruby
+# Write a program that prints the number of times the string 'bob' occurs in s. For example, if s = 'azcbobobegghakl',
+# then your program should print 
+# Number of times bob occurs is: 2
+```
+
+## Team Exercises 2 : 30 minutes
+
+```ruby
+# Write a program that accepts a comma-separated sequence of words as input and prints the words in a comma-separated 
+# sequence after sorting them alphabetically. 
+# Suppose the following input is supplied to the program: without, hello, bag, world
+# Then, the output should be: bag, hello, without, world
+```
+
 ## Range
+
 A [`Range`](http://ruby-doc.org/core-2.5.1/Range.html) allows you to define a range of values. You can then turn that range into an array and get all the sweet array methods. This is a great technique to avoid for loops. you can use three dots instead of two for an exclusive range.
 ```ruby
 (1..10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
