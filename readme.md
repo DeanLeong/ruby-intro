@@ -96,9 +96,11 @@ There are a number of methods available for the integer class, which you can pla
 ```
 
 ## Constants
-Constant names must begin with a capital letter (Suresh) and by convention frequently use all capitals (SURESH), making them easy to spot. Class names, for example, are constants. As their name suggests, constants are not expected to have their values changed after initial assignment. You can reassign a value to a constant, but Ruby will generate a warning if you do. Second, and more importantly, since constants refer to objects, the contents of the object to which the constant refers might change without Ruby generating a warning. Thus, Ruby constants are called mutable because although a constant is only expected to refer to a single object throughout the program, the value of that object may vary. Finally, constants must have a value assigned to them to exist.
+
+Constant names must begin with a capital letter (Pi) and by convention frequently use all capitals (PI), making them easy to spot. Class names, for example, are constants. As their name suggests, constants are not expected to have their values changed after initial assignment. You can reassign a value to a constant, but Ruby will generate a warning if you do. Second, and more importantly, since constants refer to objects, the contents of the object to which the constant refers might change without Ruby generating a warning. Thus, Ruby constants are called mutable because although a constant is only expected to refer to a single object throughout the program, the value of that object may vary. Finally, constants must have a value assigned to them to exist.
 
 ## Parallel Variable Assignment
+
 With parallel assignment, you can assign several values to several variables in a single expression, based on order. A list of variables, separated by commas, can be placed to the left of the equals sign, with the list of values to assign them on the right. Here are a few examples:
 
 ```ruby
@@ -107,6 +109,7 @@ a, b, c = "cash", 1.99, 100
 ```
 
 ## Symbols
+
 Ruby has a special object called a symbol. Symbols are like placeholders for identifiers and strings. They are always prefixed by a colon (:); for example, :en and :logos. Only one copy of the symbol is held in a single memory address as long as the program is running. You don’t create a symbol directly by assigning a value to it. You create a symbol by calling the String#to_sym or String#intern methods on a string, or by assigning a symbol to a symbol:
 
 ```ruby
@@ -126,9 +129,190 @@ name == :Bobby.to_s # => true
  => true
 ```
 
----
+## Strings
 
-## Boolean states, Boolean objects, and nil
+A [`String`](https://ruby-doc.org/core-2.6/String.html) in Ruby is similar to strings in JS.
+
+## What is a String?
+
+A string is a series of text characters. You can use strings to hold names, email addresses, phone numbers, and a million other things. Ruby’s strings are special because even very large strings are highly efficient to work with (this isn’t true in many other languages). Strings in Ruby are derived from the String class, and there are over 100 methods to manipulate and operate on strings. This is perhaps because, in programming, a lot revolves around strings, and Ruby reduces the headache by managing a lot out of the box.
+
+The easiest way to specify a string is to surround it either with double quotes (") or single quotes ('). The two types of quotes work a little differently
+
+- Ruby’s string literal syntax, as well as the String operators for concatenation (+), appends (<<), repetition (*), and indexing ([]).
+
+```ruby
+s = "hello"
+s.concat(" world") # Synonym for <<. Mutating append to s. Returns new s
+s.insert(5, " there") # Same as s[5] = " there". Alters s. Returns new s
+s.slice(0,5) # Same as s[0,5]. Returns a substring
+s.slice!(5,6) # Deletion. Same as s[5,6]="". Returns deleted substring
+s.eql?("hello world") # True. Same as ==
+```
+
+## There are several methods for querying the length of a string:
+
+```ruby
+s.length # => 5: counts characters in 1.9, bytes in 1.8
+s.size # => 5: size is a synonym
+s.bytesize # => 5: length in bytes; Ruby 1.9 only
+s.empty? # => false
+"".empty? # => true
+```
+
+## Finding the position of a substring or pattern match
+- String methods for searching a string and for replacing content include the following:
+
+```ruby
+s = "hello"
+s.index('l') # => 2: index of first l in string
+s.index(?l) # => 2: works with character codes as well
+s.index(/l+/) # => 2: works with regular expressions, too
+s.index('l',3) # => 3: index of first l in string at or after position 3
+s.index('Ruby') # => nil: search string not found
+s.rindex('l') # => 3: index of rightmost l in string
+s.rindex('l',2) # => 2: index of rightmost l in string at or before 2
+```
+
+## Checking for prefixes and suffixes
+
+```ruby
+s.start_with? "hell" # => true. Note singular "start" not "starts"
+s.end_with? "bells" # => false
+```
+
+## Testing for presence of substring
+
+```ruby
+s.include?("ll") # => true: "hello" includes "ll"
+s.include?(?H) # => false: "hello" does not include character H
+```
+
+## Pattern matching with regular expressions
+
+```ruby
+s =~ /[aeiou]{2}/ # => nil: no double vowels in "hello"
+s.match(/[aeiou]/) {|m| m.to_s} # => "e": return first vowel
+```
+
+## Splitting a string into substrings based on a delimiter string or pattern
+
+```ruby
+"this is it".split # => ["this", "is", "it"]: split on spaces by default
+"hello".split('l') # => ["he", "", "o"]
+"1, 2,3".split(/,\s*/) # => ["1","2","3"]: comma and optional space delimiter
+```
+
+## Split a string into two parts plus a delimiter
+- These methods always return arrays of 3 strings:
+
+```ruby
+"banana".partition("an") # => ["b", "an", "ana"]
+"banana".rpartition("an") # => ["ban", "an", "a"]: start from right
+"a123b".partition(/\d+/) # => ["a", "123", "b"]: works with Regexps, too
+```
+
+### Interpolation
+
+To interpolate strings in Ruby, you must use double quotes
+
+```ruby
+"I have #{13 * 4} cards" # => "I have 52 cards"
+'I have #{13 * 4} cards' # => 'I have #{13 * 4} cards'
+```
+
+### Concatenation
+
+You can also concatenate strings but this is NOT recommend
+
+```ruby
+'foo' + 'bar' # => 'foobar'
+'foo' + 2 # => TypeError: no implicit conversion of Integer into String
+'foo' + 2.to_s # => 'foo2'
+```
+
+Above we see that we can NOT implicitly convert a non-string into a string (unlike what we have seen in JS).
+
+Use single quotes for strings that are not interpolated
+
+## Symbols
+
+A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`.  It cannot be mutated or manipulated.  It is used represent _things_ rather than _text_.  Symbols start with `:`.
+
+```ruby
+:foo # => :foo
+:foo == :foo # => true
+:foo == :bar # => false
+:foo == 'foo' # false
+```
+
+The more you see them the more you will understand the use-case.
+Symbols use memory more efficiently
+```ruby
+string1 = 'hello'
+string2 = 'hello'
+symbol1 = :hello
+symbol2 = :hello
+
+string1.object_id #=> 1234
+string2.object_id #=> 4567
+
+symbol1.object_id #=> 7890
+symbol2.object_id #=> 7890
+```
+  
+
+## Booleans
+
+Of course Ruby has two booleans `true` and `false`
+
+Each object has a `==` method that compares to another object.
+
+```ruby
+1 == 1 # => true
+1 == '1' # => false
+1 == 1.0 # => true
+[:foo, :bar] == [:foo, :bar] # => true
+[:foo, :bar] == [:bar, :foo] # => false
+{a: 1, b: 2} == {b: 2, a: 1} # => true
+```
+
+> Do NOT use `===`. This is not the same as what it means in JS.  (Look it up if you are curious)
+
+### Truthy and Falsy
+
+Ruby only has **two** falsy values: `nil` and `false`.
+
+So unlike JS `0` and `''` are truthy.  (There is no `null`, `undefined`, `NaN`, `-0`)
+
+```ruby
+!! false # => false
+!! nil # => false
+
+!! 0 # => true
+!! '' # => true
+```
+
+## Local Variables
+A local variable has a local scope or context. If defined within a method, for example, its scope is kept within that method. Local variable names must begin with either a lowercase letter or an underscore (_), and must not be prefixed with @, @@, or $ because they are reserved for other types of variables. Following are a few examples of local variables:
+
+```ruby
+x = 1.0    # x is a Float
+y = "Yes"  # y is a String
+_temp = 16 # _temp is a Integer
+``` 
+
+## Instance Variables
+An instance variable belongs to a particular instance of a class, hence the name. It can only be accessed from outside that instance via an accessor (helper) method. Instance variables are always prefixed with a single at sign (@), as in @hello.
+
+## Class Variables
+A class variable is shared among all instances of a class. Only one copy of a class variable exists for a given class. It is prefixed by two at signs (@@), such as @@times. You have to initialize (declare a value for) a class variable before you use it.
+
+## Global Variables
+Global variables are globally available to a program, inside any structure. Their scope is the whole program. They are prefixed by a dollar sign ($), such as $amount.
+
+
+## Boolean States, Boolean Objects, and nil
 
 Every expression in Ruby evaluates to an object, and every object has a Boolean value of either true or false. Furthermore, true and false are objects. This idea isn’t as convoluted as it sounds. If true and false weren’t objects, then a pure Boolean expression like
 
@@ -139,9 +323,6 @@ Every expression in Ruby evaluates to an object, and every object has a Boolean 
 would have no object to evaluate to. (And > is a method and therefore has to return an object.)
 
 In many cases where you want to get at a truth/falsehood value, such as an if statement or a comparison between two numbers, you don’t have to manipulate these special objects directly. In such situations, you can think of truth and falsehood as states, rather than objects.
-
-We’ll look at true and false both as states and as special objects, along with the special object nil.
-
 
 ## The special object nil
 
@@ -178,191 +359,6 @@ It’s not accurate to say that nil is empty, because doing so would imply that 
 Coming full circle, remember that nil has a Boolean value of false. nil and false are the only two objects that do. They’re not the only two expressions that do; 100 < 50 has a Boolean value of false, because it evaluates to the object false. But nil and false are the only two objects in Ruby with a Boolean value of false. All other Ruby objects—numbers, strings, instances of MyCoolClass—have a Boolean value of true. Tested directly, they all pass the if test.
 
 Boolean values and testing provide a segue into the next topic: comparisons between objects. We’ll look at tests involving two objects and ways of determining whether they’re equal—and, if they aren’t, whether they can be ranked as greater/lesser, and based on what criteria.
-
-## Strings
-
-A [`String`](https://ruby-doc.org/core-2.6/String.html) in Ruby is similar to strings in JS.
-
-## What is a String?
-A string is a series of text characters. You can use strings to hold names, email addresses, phone numbers, and a million other things. Ruby’s strings are special because even very large strings are highly efficient to work with (this isn’t true in many other languages). Strings in Ruby are derived from the String class, and there are over 100 methods to manipulate and operate on strings. This is perhaps because, in programming, a lot revolves around strings, and Ruby reduces the headache by managing a lot out of the box.
-
-The easiest way to specify a string is to surround it either with double quotes (") or single quotes ('). The two types of quotes work a little differently
-
-- Ruby’s string literal syntax, as well as the String operators for concatenation (+), appends (<<), repetition (*), and indexing ([]).
-
-```ruby
-s = "hello"
-s.concat(" world") # Synonym for <<. Mutating append to s. Returns new s
-s.insert(5, " there") # Same as s[5] = " there". Alters s. Returns new s
-s.slice(0,5) # Same as s[0,5]. Returns a substring
-s.slice!(5,6) # Deletion. Same as s[5,6]="". Returns deleted substring
-s.eql?("hello world") # True. Same as ==
-```
-
-## There are several methods for querying the length of a string:
-
-```ruby
-s.length # => 5: counts characters in 1.9, bytes in 1.8
-s.size # => 5: size is a synonym
-s.bytesize # => 5: length in bytes; Ruby 1.9 only
-s.empty? # => false
-"".empty? # => true
-```
-
-## Finding the position of a substring or pattern match
--String methods for searching a string and for replacing content include the following:
-
-```ruby
-s = "hello"
-s.index('l') # => 2: index of first l in string
-s.index(?l) # => 2: works with character codes as well
-s.index(/l+/) # => 2: works with regular expressions, too
-s.index('l',3) # => 3: index of first l in string at or after position 3
-s.index('Ruby') # => nil: search string not found
-s.rindex('l') # => 3: index of rightmost l in string
-s.rindex('l',2) # => 2: index of rightmost l in string at or before 2
-```
-
-## Checking for prefixes and suffixes: Ruby 1.9 and later
-```ruby
-s.start_with? "hell" # => true. Note singular "start" not "starts"
-s.end_with? "bells" # => false
-```
-
-## Testing for presence of substring
-```ruby
-s.include?("ll") # => true: "hello" includes "ll"
-s.include?(?H) # => false: "hello" does not include character H
-```
-
-## Pattern matching with regular expressions
-```ruby
-s =~ /[aeiou]{2}/ # => nil: no double vowels in "hello"
-s.match(/[aeiou]/) {|m| m.to_s} # => "e": return first vowel
-```
-
-## Splitting a string into substrings based on a delimiter string or pattern
-```ruby
-"this is it".split # => ["this", "is", "it"]: split on spaces by default
-"hello".split('l') # => ["he", "", "o"]
-"1, 2,3".split(/,\s*/) # => ["1","2","3"]: comma and optional space delimiter
-```
-
-## Split a string into two parts plus a delimiter. Ruby 1.9 only.
-- These methods always return arrays of 3 strings:
-
-```ruby
-"banana".partition("an") # => ["b", "an", "ana"]
-"banana".rpartition("an") # => ["ban", "an", "a"]: start from right
-"a123b".partition(/\d+/) # => ["a", "123", "b"]: works with Regexps, too
-```
-
-## Search and replace the first (sub, sub!) or all (gsub, gsub!)
-- occurrences of the specified string or pattern.
-- More about sub and gsub when we cover regular expressions later.
-```ruby
-s.sub("l", "L") # => "heLlo": Just replace first occurrence
-s.gsub("l", "L") # => "heLLo": Replace all occurrences
-s.sub!(/(.)(.)/, '\2\1') # => "ehllo": Match and swap first 2 letters
-s.sub!(/(.)(.)/, "\\2\\1") # => "hello": Double backslashes for double quotes
-```
-
-## sub and gsub can also compute a replacement string with a block
-- Match the first letter of each word and capitalize it
-```ruby
-"hello world".gsub(/\b./) {|match| match.upcase } # => "Hello World"
-```
-
-There is nothing magic about having a `!` at the end of a method but it is often used for "dangerous" operations
-
-### Interpolation
-
-To interpolate strings in Ruby, you must use double quotes
-
-```ruby
-"I have #{13 * 4} cards" # => "I have 52 cards"
-'I have #{13 * 4} cards' # => 'I have #{13 * 4} cards'
-```
-
-> In case you forgot, ES6 string interpolation ```looks like `${this}` ```
-
-### Concatenation
-
-You can also concatenate strings but this is NOT recommend
-
-```ruby
-'foo' + 'bar' # => 'foobar'
-'foo' + 2 # => TypeError: no implicit conversion of Integer into String
-'foo' + 2.to_s # => 'foo2'
-```
-
-Above we see that we can NOT implicitly convert a non-string into a string (unlike what we have seen in JS).
-
-
-Use single quotes for strings that are not interpolated
-
-> Warning: Backticks are *not* used for strings! They are used to execute commands. (`echo hello world`) --more info--
-
-
-## Symbols
-
-A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`.  It cannot be mutated or manipulated.  It is used represent _things_ rather than _text_.  Symbols start with `:`.
-
-```ruby
-:foo # => :foo
-:foo == :foo # => true
-:foo == :bar # => false
-:foo == 'foo' # false
-```
-
-The more you see them the more you will understand the use-case.
-Symbols use memory more efficiently
-```ruby
-string1 = 'hello'
-string2 = 'hello'
-symbol1 = :hello
-symbol2 = :hello
-
-string1.object_id #=> 1234
-string2.object_id #=> 4567
-
-symbol1.object_id #=> 7890
-symbol2.object_id #=> 7890
-```
-  
-
-## Booleans and `nil`
-
-Of course Ruby has two booleans `true` and `false`
-
-Each object has a `==` method that compares to another object.
-
-```ruby
-1 == 1 # => true
-1 == '1' # => false
-1 == 1.0 # => true
-[:foo, :bar] == [:foo, :bar] # => true
-[:foo, :bar] == [:bar, :foo] # => false
-{a: 1, b: 2} == {b: 2, a: 1} # => true
-```
-
-> Do NOT use `===`. This is not the same as what it means in JS.  (Look it up if you are curious)
-
-Ruby also has `nil`.  This is similar to `null` or `undefined` in JS. (There is no distinction in Ruby)
-
-### Truthy and Falsy
-
-Ruby only has **two** falsy values: `nil` and `false`.
-
-So unlike JS `0` and `''` are truthy.  (There is no `null`, `undefined`, `NaN`, `-0`)
-
-```ruby
-!! false # => false
-!! nil # => false
-
-!! 0 # => true
-!! '' # => true
-```
 
 ## Arrays
 
@@ -783,14 +779,6 @@ Here are the most important rules
 * **Do** use parens for every method except for DSLs (and a small list of other common methods)
   * `attr_reader`, `puts`, `require`, `include`, `it`, `has_many`, ...
 
-## Instance Variables
-An instance variable belongs to a particular instance of a class, hence the name. It can only be accessed from outside that instance via an accessor (helper) method. Instance variables are always prefixed with a single at sign (@), as in @hello.
-
-## Class Variables
-A class variable is shared among all instances of a class. Only one copy of a class variable exists for a given class. It is prefixed by two at signs (@@), such as @@times. You have to initialize (declare a value for) a class variable before you use it.
-
-## Global Variables
-Global variables are globally available to a program, inside any structure. Their scope is the whole program. They are prefixed by a dollar sign ($), such as $amount.
 
 ## Resources
 
