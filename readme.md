@@ -46,20 +46,156 @@ Just run `ruby FILENAME.rb`.  You can also run [`pry`](http://pryrepl.org/) this
 
 > [`irb`](https://www.tutorialspoint.com/ruby/interactive_ruby.htm) is the official ruby repl but `pry` is much better
 
+## What is a variable?
+
+A variable is an identifier that is assigned to an object, and which may hold a value. Ruby variables are not declared, nor are they statically typed. Instead, the type of value is assigned at runtime. Ruby uses duck typing, which is a kind of dynamic typing. If a value behaves or acts like a certain type (duck), such as an integer, Ruby gives it a context and treats it as such (it’s probably a duck). If a variable is able to act like an integer, for example, then it is legal and appropriate to use it in that context.
+
+## Examples:
+```ruby
+welcome = 'Welcome to Ruby Programming' # => String
+one     = 1 # => Integer
+price   = 10.25 # => Float
+```
+
 ## Numbers
 
 Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.5.1/Numeric.html) class.  It's subclasses include [`Integer`](https://ruby-doc.org/core-2.5.1/Integer.html) and [`Float`](https://ruby-doc.org/core-2.5.1/Float.html)
 
 ```ruby
-1.class # => Integer
-1.0.class # => Float
-
-2 - 3 # => -1
-2 * 3 # => 6
-1 + 1 # => 2
-1 / 2 # => 0 (rounds down)
-1 / 2.0 #=> 0.5 (does not round float)
+2.6.5 > 1.class
+ => Integer
+2.6.5 > 1.0.class 
+ => Float
+2.6.5 > 1+1
+ => 2 
+2.6.5 > 3-1
+ => 2 
+2.6.5 > 3*3
+ => 9 
+2.6.5 > 10/2
+ => 5 
+2.6.5 > 1 / 2 
+ => 0 (rounds down)
+2.6.5 > 1 / 2.0 
+ => 0.5 (does not round float)
+2.6.5 > 2.next
+ => 3 (.next provides the next integer value)
+2.6.5 > 2.pred
+ => 1 (.pred provides the preceding integer value)
+2.6.5 > 2.lcm(3)
+ => 6 (.lcm gives us the least common multiple of the integer to which the method is applied and the value passed)
+2.6.5 > 2.gcd(3)
+ => 1 (.gcd provides the greatest common divisor of the integer to which the method is applied and the value passed)
 ```
+
+There are a number of methods available for the integer class, which you can play around with. Simply check them by using .methods on the integer.
+
+```ruby
+2.6.5 > 2.methods
+ => [:-@, :**, :<=>, :upto, :<<, :<=, :>=, :==, :chr, :===, :>>, :[], :%, :&, :inspect, :*, :+, :ord, :-, :/, :size, :succ, :<, :>, :to_int, :coerce, :to_s, :to_i, :to_f, :divmod, :to_r, :fdiv, :modulo, :remainder, :abs, :magnitude, :integer?, :floor, :ceil, :round, :truncate, :^, :odd?, :even?, :allbits?, :anybits?, :nobits?, :downto, :times, :pred, :pow, :bit_length, :digits, :numerator, :denominator, :rationalize, :gcd, :lcm, :gcdlcm, :next, :div, :|, :~, :imag, :abs2, :+@, :phase, :to_c, :polar, :angle, :conjugate, :conj, :eql?, :singleton_method_added, :i, :real?, :zero?, :nonzero?, :finite?, :infinite?, :step, :positive?, :negative?, :clone, :dup, :arg, :quo, :rectangular, :rect, :real, :imaginary, :between?, :clamp, :instance_variable_defined?, :remove_instance_variable, :instance_of?, :kind_of?, :is_a?, :tap, :instance_variable_set, :protected_methods, :instance_variables, :instance_variable_get, :private_methods, :public_methods, :public_send, :method, :public_method, :singleton_method, :define_singleton_method, :extend, :to_enum, :enum_for, :=~, :!~, :respond_to?, :freeze, :object_id, :send, :display, :nil?, :hash, :class, :singleton_class, :itself, :yield_self, :then, :taint, :tainted?, :untaint, :untrust, :untrusted?, :trust, :frozen?, :methods, :singleton_methods, :equal?, :!, :instance_exec, :!=, :instance_eval, :__id__, :__send__] 
+```
+
+## Local Variables
+A local variable has a local scope or context. If defined within a method, for example, its scope is kept within that method. Local variable names must begin with either a lowercase letter or an underscore (_), and must not be prefixed with @, @@, or $ because they are reserved for other types of variables. Following are a few examples of local variables:
+
+```ruby
+x = 1.0    # x is a Float
+y = "Yes"  # y is a String
+_temp = 16 # _temp is a Integer
+``` 
+
+## Instance Variables
+An instance variable belongs to a particular instance of a class, hence the name. It can only be accessed from outside that instance via an accessor (helper) method. Instance variables are always prefixed with a single at sign (@), as in @hello.
+
+## Class Variables
+A class variable is shared among all instances of a class. Only one copy of a class variable exists for a given class. It is prefixed by two at signs (@@), such as @@times. You have to initialize (declare a value for) a class variable before you use it.
+
+## Global Variables
+Global variables are globally available to a program, inside any structure. Their scope is the whole program. They are prefixed by a dollar sign ($), such as $amount.
+
+## Constants
+Constant names must begin with a capital letter (Suresh) and by convention frequently use all capitals (SURESH), making them easy to spot. Class names, for example, are constants. As their name suggests, constants are not expected to have their values changed after initial assignment. You can reassign a value to a constant, but Ruby will generate a warning if you do. Second, and more importantly, since constants refer to objects, the contents of the object to which the constant refers might change without Ruby generating a warning. Thus, Ruby constants are called mutable because although a constant is only expected to refer to a single object throughout the program, the value of that object may vary. Finally, constants must have a value assigned to them to exist.
+
+## Parallel Variable Assignment
+With parallel assignment, you can assign several values to several variables in a single expression, based on order. A list of variables, separated by commas, can be placed to the left of the equals sign, with the list of values to assign them on the right. Here are a few examples:
+
+```ruby
+name, grade, gpa = 'Suresh', 89, 3.6
+a, b, c = "cash", 1.99, 100
+```
+
+## Symbols
+Ruby has a special object called a symbol. Symbols are like placeholders for identifiers and strings. They are always prefixed by a colon (:); for example, :en and :logos. Only one copy of the symbol is held in a single memory address as long as the program is running. You don’t create a symbol directly by assigning a value to it. You create a symbol by calling the String#to_sym or String#intern methods on a string, or by assigning a symbol to a symbol:
+
+```ruby
+2.6.5 > name = "Bobby"
+ => "Bobby" 
+2.6.5 > name.to_sym # => :Bobby
+ => :Bobby 
+2.6.5 > name.intern # => :Bobby
+ => :Bobby 
+2.6.5 > "Hello".to_sym # => :Hello
+ => :Hello 
+2.6.5 > :Hello.to_s # => "Hello"
+ => "Hello" 
+2.6.5 > :Hello.id2name # => "Hello"
+ => "Hello" 
+2.6.5 > name == :Bobby.to_s # => true
+ => true
+```
+
+---
+
+## Boolean states, Boolean objects, and nil
+
+Every expression in Ruby evaluates to an object, and every object has a Boolean value of either true or false. Furthermore, true and false are objects. This idea isn’t as convoluted as it sounds. If true and false weren’t objects, then a pure Boolean expression like
+
+```
+100 > 80
+```
+
+would have no object to evaluate to. (And > is a method and therefore has to return an object.)
+
+In many cases where you want to get at a truth/falsehood value, such as an if statement or a comparison between two numbers, you don’t have to manipulate these special objects directly. In such situations, you can think of truth and falsehood as states, rather than objects.
+
+We’ll look at true and false both as states and as special objects, along with the special object nil.
+
+
+## The special object nil
+
+The special object nil is, indeed, an object (it’s the only instance of a class called NilClass). But in practice, it’s also a kind of nonobject. The Boolean value of nil is false, but that’s just the start of its nonobjectness.
+
+nil denotes an absence of anything. You can see this graphically when you inquire into the value of, for example, an instance variable you haven’t initialized:
+
+```ruby
+puts @x
+```
+
+This command prints an empty string and returns nil. (If you try this with a local variable, you’ll get an error; local variables aren’t automatically initialized to anything, not even nil.) nil is also the default value for nonexistent elements of container and collection objects. For example, if you create an array with three elements, and then you try to access the tenth element (at index 9, because array indexing starts at 0), you’ll find that it’s nil:
+
+```ruby
+2.6.5 > ["one","two","three"][9]
+ => nil 
+```
+
+nil is sometimes a difficult object to understand. It’s all about absence and nonexistence; but nil does exist, and it responds to method calls like other objects:
+
+```ruby
+2.6.5 > nil.to_s
+ => "" 
+2.6.5 > nil.to_i
+ => 0 
+2.6.5 > nil.object_id
+ => 8 
+```
+
+The to_s conversion of nil is an empty string (""); the integer representation of nil is 0; and nil’s object ID is 8. (nil has no special relationship to 8; that just happens to be the number designated as its ID.)
+
+It’s not accurate to say that nil is empty, because doing so would imply that it has characteristics and dimension, like a number or a collection, which it isn’t supposed to. Trying to grasp nil can take you into some thorny philosophical territory. You can think of nil as an object that exists and that comes equipped with a survival kit of methods but that serves the purpose of representing absence and a state of being undetermined.
+
+Coming full circle, remember that nil has a Boolean value of false. nil and false are the only two objects that do. They’re not the only two expressions that do; 100 < 50 has a Boolean value of false, because it evaluates to the object false. But nil and false are the only two objects in Ruby with a Boolean value of false. All other Ruby objects—numbers, strings, instances of MyCoolClass—have a Boolean value of true. Tested directly, they all pass the if test.
+
+Boolean values and testing provide a segue into the next topic: comparisons between objects. We’ll look at tests involving two objects and ways of determining whether they’re equal—and, if they aren’t, whether they can be ranked as greater/lesser, and based on what criteria.
 
 ## Strings
 
