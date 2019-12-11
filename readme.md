@@ -75,17 +75,17 @@ Numbers in Ruby are in the [`Numeric`](https://ruby-doc.org/core-2.5.1/Numeric.h
 10/2
  => 5 
 1 / 2 
- => 0 (rounds down)
+ => 0 # (rounds down)
 1 / 2.0 
- => 0.5 (does not round float)
+ => 0.5 # (does not round float)
 2.next
- => 3 (.next provides the next integer value)
+ => 3 # (.next provides the next integer value)
 2.pred
- => 1 (.pred provides the preceding integer value)
+ => 1 # (.pred provides the preceding integer value)
 2.lcm(3)
- => 6 (.lcm gives us the least common multiple of the integer to which the method is applied and the value passed)
+ => 6 # (.lcm gives us the least common multiple of the integer to which the method is applied and the value passed)
 2.gcd(3)
- => 1 (.gcd provides the greatest common divisor of the integer to which the method is applied and the value passed)
+ => 1 # (.gcd provides the greatest common divisor of the integer to which the method is applied and the value passed)
 ```
 
 There are a number of methods available for the integer class, which you can play around with. Simply check them by using .methods on the integer.
