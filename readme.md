@@ -108,32 +108,7 @@ name, grade, gpa = 'Suresh', 89, 3.6
 a, b, c = "cash", 1.99, 100
 ```
 
-## Symbols
-
-Ruby has a special object called a symbol. Symbols are like placeholders for identifiers and strings. They are always prefixed by a colon (:); for example, :en and :logos. Only one copy of the symbol is held in a single memory address as long as the program is running. You don’t create a symbol directly by assigning a value to it. You create a symbol by calling the String#to_sym or String#intern methods on a string, or by assigning a symbol to a symbol:
-
-```ruby
-name = "Bobby"
- => "Bobby" 
-name.to_sym # => :Bobby
- => :Bobby 
-name.intern # => :Bobby
- => :Bobby 
-"Hello".to_sym # => :Hello
- => :Hello 
-:Hello.to_s # => "Hello"
- => "Hello" 
-:Hello.id2name # => "Hello"
- => "Hello" 
-name == :Bobby.to_s # => true
- => true
-```
-
-## Strings
-
-A [`String`](https://ruby-doc.org/core-2.6/String.html) in Ruby is similar to strings in JS.
-
-## What is a String?
+## [Strings](https://ruby-doc.org/core-2.6/String.html)
 
 A string is a series of text characters. You can use strings to hold names, email addresses, phone numbers, and a million other things. Ruby’s strings are special because even very large strings are highly efficient to work with (this isn’t true in many other languages). Strings in Ruby are derived from the String class, and there are over 100 methods to manipulate and operate on strings. This is perhaps because, in programming, a lot revolves around strings, and Ruby reduces the headache by managing a lot out of the box.
 
@@ -150,7 +125,7 @@ s.slice!(5,6) # Deletion. Same as s[5,6]="". Returns deleted substring
 s.eql?("hello world") # True. Same as ==
 ```
 
-## There are several methods for querying the length of a string:
+### There are several methods for querying the length of a string:
 
 ```ruby
 s.length # => 5: counts characters in 1.9, bytes in 1.8
@@ -160,7 +135,7 @@ s.empty? # => false
 "".empty? # => true
 ```
 
-## Finding the position of a substring or pattern match
+### Finding the position of a substring or pattern match
 - String methods for searching a string and for replacing content include the following:
 
 ```ruby
@@ -174,7 +149,7 @@ s.rindex('l') # => 3: index of rightmost l in string
 s.rindex('l',2) # => 2: index of rightmost l in string at or before 2
 ```
 
-## Checking for prefixes and suffixes
+### Checking for prefixes and suffixes
 
 ```ruby
 s.start_with? "hell" # => true. Note singular "start" not "starts"
@@ -188,7 +163,7 @@ s.include?("ll") # => true: "hello" includes "ll"
 s.include?(?H) # => false: "hello" does not include character H
 ```
 
-## Pattern matching with regular expressions
+### Pattern matching with regular expressions
 
 ```ruby
 s =~ /[aeiou]{2}/ # => nil: no double vowels in "hello"
@@ -203,7 +178,7 @@ s.match(/[aeiou]/) {|m| m.to_s} # => "e": return first vowel
 "1, 2,3".split(/,\s*/) # => ["1","2","3"]: comma and optional space delimiter
 ```
 
-## Split a string into two parts plus a delimiter
+### Split a string into two parts plus a delimiter
 - These methods always return arrays of 3 strings:
 
 ```ruby
@@ -260,7 +235,6 @@ string2.object_id #=> 4567
 symbol1.object_id #=> 7890
 symbol2.object_id #=> 7890
 ```
-  
 
 ## Booleans
 
@@ -428,7 +402,8 @@ To iterate over a list in reverse order, use the reverse_each method:
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 numbers.reverse_each {|x| puts x }
 ```
- The map method acts just like collect, but instead of creating a new array to hold the return values of its calls to the code block, it replaces each item in the old array with the corresponding value from the code block. This saves memory and time, but it destroys the old array
+
+The map method acts just like collect, but instead of creating a new array to hold the return values of its calls to the code block, it replaces each item in the old array with the corresponding value from the code block. This saves memory and time, but it destroys the old array
 ```ruby
 students = %w(John Suresh Casey)
 puts students[0].object_id
@@ -482,7 +457,7 @@ my_array.freeze
 my_array << 4 # this will cause an error
 ```
 
-## Team Exercises 1 : 30 minutes
+## Team Exercise 1
 
 ```ruby
 # Write a program that prints the number of times the string 'bob' occurs in s. For example, if s = 'azcbobobegghakl',
@@ -490,7 +465,7 @@ my_array << 4 # this will cause an error
 # Number of times bob occurs is: 2
 ```
 
-## Team Exercises 2 : 30 minutes
+## Team Exercise 2
 
 ```ruby
 # Write a program that accepts a comma-separated sequence of words as input and prints the words in a comma-separated 
@@ -505,7 +480,8 @@ A [`Range`](http://ruby-doc.org/core-2.5.1/Range.html) allows you to define a ra
 ```ruby
 (1..10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 (1...10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9]
-``` 
+```
+
 ## Hashes
 
 A [`Hash`](https://ruby-doc.org/core-2.5.1/Hash.html) is similar to a JS object.
