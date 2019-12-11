@@ -589,12 +589,6 @@ These are most common when using and creating external APIs but probably don't n
 
 If you are interested flex your google muscles and learn it on your own ;)
 
-## Constants
-
-Constants in Ruby always start with a capital letter.  Every `Class` is constant (Like `String` and `Numeric`).  Constants cannot be reassigned.
-
-> Do not treat constants like ES6's `const`.  Do not create constant variables inside of methods.  Use them only for classes/modules and for [class constants](https://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html)
-
 ## Style Things
 
 The Ruby community is very opinionated about styling.  As you are starting out, you MUST follow [these rules](https://github.com/bbatsov/ruby-style-guide).
@@ -627,24 +621,6 @@ Here are the most important rules
 * **Do** use parens for every method except for DSLs (and a small list of other common methods)
   * `attr_reader`, `puts`, `require`, `include`, `it`, `has_many`, ...
 
-**Other stuff**
-
-* Do not use `for`/`in` loops
-* Do not use _class variables_ (`@@these_things`)
-* Always use two spaces to indent
-  * Your text editor should do this for you when you hit tab
-* Don't use semi-colons (unless you are aware of the few exceptions)
-* Do not use global variables (`$these_things`). Usually a constant will do
-
-
-## Note about Sigils
-
-JS does not have Sigils.  In ruby, starting a variable with a sigil (`@`, `@@`, `$`, `:`, or a capital letter) affects the compiler.
-
-Instance variable | Class variable | Global variable | Symbol | Constant
---- | --- | --- | --- | ---
-`@foo` | `@@foo` | `$foo` | `:foo` | `Foo`
-_ivars_. (next lecture) | Research if interested | Research if interested | [Discussed above](#symbols) | [Discussed above](#constants)
 
 ## Resources
 
