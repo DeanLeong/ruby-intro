@@ -19,6 +19,8 @@
 
 [Ruby](https://www.ruby-lang.org/en/about/) is a high-level  programming language that gives us a lot of nice features out of the box.
 
+Ruby is object-oriented: every value is an object, including classes and instances of types that many other languages designate as primitives (such as integers, booleans, and "null"). Variables always hold references to objects. Every function is a method and methods are always called on an object.
+
 It is meant to be pretty, unobtrusive, and super readable.
 
 Ruby does **not** run in the browser.  It is most commonly used for backend web development with frameworks like [Sinatra](http://www.sinatrarb.com/) and [Rails](http://rubyonrails.org/).
@@ -30,8 +32,10 @@ Ruby does **not** run in the browser.  It is most commonly used for backend web 
 * "Matz Is Nice And So We Are Nice"
 * Mentality not only applies to how you should treat your fellow developers, but also the philosophy behind Ruby itself.
 * Yukihiro Matsumoto ("Matz") created Ruby to increase developer happiness.
+He developed Ruby throughout the 90's and has continued to work on the language since. He is now the Chief architect of Ruby at Heroku.
 
-> "Programmers often feel joy when they can concentrate on the creative side of programming, so Ruby is designed to make programmers happy." — Yukihiro "Matz" Matsumoto  
+
+> "Programmers often feel joy when they can concentrate on the creative side of programming, so Ruby is designed to make programmers happy." — Yukihiro "Matz" Matsumoto  	![](https://www.azquotes.com/picture-quotes/quote-i-believe-that-the-purpose-of-life-is-at-least-in-part-to-be-happy-based-on-this-belief-yukihiro-matsumoto-102-79-90.jpg)
 
 ### A **Natural** Language
 
