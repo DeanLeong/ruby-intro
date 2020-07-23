@@ -19,6 +19,8 @@
 
 [Ruby](https://www.ruby-lang.org/en/about/) is a high-level  programming language that gives us a lot of nice features out of the box.
 
+Ruby is object-oriented: every value is an object, including classes and instances of types that many other languages designate as primitives (such as integers, booleans, and "null"). Variables always hold references to objects. Every function is a method and methods are always called on an object.
+
 It is meant to be pretty, unobtrusive, and super readable.
 
 Ruby does **not** run in the browser.  It is most commonly used for backend web development with frameworks like [Sinatra](http://www.sinatrarb.com/) and [Rails](http://rubyonrails.org/).
@@ -30,8 +32,10 @@ Ruby does **not** run in the browser.  It is most commonly used for backend web 
 * "Matz Is Nice And So We Are Nice"
 * Mentality not only applies to how you should treat your fellow developers, but also the philosophy behind Ruby itself.
 * Yukihiro Matsumoto ("Matz") created Ruby to increase developer happiness.
+He developed Ruby throughout the 90's and has continued to work on the language since. He is now the Chief architect of Ruby at Heroku.
 
-> "Programmers often feel joy when they can concentrate on the creative side of programming, so Ruby is designed to make programmers happy." — Yukihiro "Matz" Matsumoto  
+
+> "Programmers often feel joy when they can concentrate on the creative side of programming, so Ruby is designed to make programmers happy." — Yukihiro "Matz" Matsumoto  	![](https://www.azquotes.com/picture-quotes/quote-i-believe-that-the-purpose-of-life-is-at-least-in-part-to-be-happy-based-on-this-belief-yukihiro-matsumoto-102-79-90.jpg)
 
 ### A **Natural** Language
 
@@ -92,6 +96,7 @@ There are a number of methods available for the integer class, which you can pla
 
 ```ruby
 2.methods
+
  => [:-@, :**, :<=>, :upto, :<<, :<=, :>=, :==, :chr, :===, :>>, :[], :%, :&, :inspect, :*, :+, :ord, :-, :/, :size, :succ, :<, :>, :to_int, :coerce, :to_s, :to_i, :to_f, :divmod, :to_r, :fdiv, :modulo, :remainder, :abs, :magnitude, :integer?, :floor, :ceil, :round, :truncate, :^, :odd?, :even?, :allbits?, :anybits?, :nobits?, :downto, :times, :pred, :pow, :bit_length, :digits, :numerator, :denominator, :rationalize, :gcd, :lcm, :gcdlcm, :next, :div, :|, :~, :imag, :abs2, :+@, :phase, :to_c, :polar, :angle, :conjugate, :conj, :eql?, :singleton_method_added, :i, :real?, :zero?, :nonzero?, :finite?, :infinite?, :step, :positive?, :negative?, :clone, :dup, :arg, :quo, :rectangular, :rect, :real, :imaginary, :between?, :clamp, :instance_variable_defined?, :remove_instance_variable, :instance_of?, :kind_of?, :is_a?, :tap, :instance_variable_set, :protected_methods, :instance_variables, :instance_variable_get, :private_methods, :public_methods, :public_send, :method, :public_method, :singleton_method, :define_singleton_method, :extend, :to_enum, :enum_for, :=~, :!~, :respond_to?, :freeze, :object_id, :send, :display, :nil?, :hash, :class, :singleton_class, :itself, :yield_self, :then, :taint, :tainted?, :untaint, :untrust, :untrusted?, :trust, :frozen?, :methods, :singleton_methods, :equal?, :!, :instance_exec, :!=, :instance_eval, :__id__, :__send__] 
 ```
 
@@ -212,7 +217,7 @@ Use single quotes for strings that are not interpolated
 
 ## Symbols
 
-A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`.  It cannot be mutated or manipulated.  It is used represent _things_ rather than _text_.  Symbols start with `:`.
+A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`, except that it's is used represent _things_ rather than _text_.  Symbols start with `:`.
 
 ```ruby
 :foo # => :foo
@@ -236,6 +241,8 @@ symbol1.object_id #=> 7890
 symbol2.object_id #=> 7890
 ```
 
+Confused? Don't worry. We are primarily only going to come across symbols in real life as the **key** name in a key / value pair: { name: "brian" }
+
 ## Booleans
 
 Of course Ruby has two booleans `true` and `false`
@@ -246,12 +253,12 @@ Each object has a `==` method that compares to another object.
 1 == 1 # => true
 1 == '1' # => false
 1 == 1.0 # => true
-[:foo, :bar] == [:foo, :bar] # => true
-[:foo, :bar] == [:bar, :foo] # => false
+[1, 2] == [1, 2] # => true
+[1, 2] == [2, 1] # => false
 {a: 1, b: 2} == {b: 2, a: 1} # => true
 ```
 
-> Do NOT use `===`. This is not the same as what it means in JS.  (Look it up if you are curious)
+> Do NOT use `===`. This is not the same as what it means in JS.
 
 ### Truthy and Falsy
 
@@ -374,19 +381,19 @@ We can also concatenate arrays
 
 ## Iterating over an array
 
-Ruby supports for loops and the other iteration constructs found in most modern programming languages, but its prefered idiom is a code block fed to an method like each or collect.
+Ruby supports for loops and the other iteration constructs found in most modern programming languages, but its preferred idiom is a code block fed to an method like each or collect.
 
 ```ruby
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 numbers.each { |x| p x }
 ```
-If you want to produce a new array based on a transformation of some other array, use Enumerable#collect along with a block that takes one element and transforms it:
+If you want to produce a new array based on a transformation of some other array, use `.map` along with a block that takes one element and transforms it:
 ```ruby
 numbers = [1,2,3]
-numbers_two = numbers.collect {|x| x+1 }
+numbers_two = numbers.map {|x| x+1 }
 p numbers_two
 ```
-Methods like each and collect are called generators or iterators: they iterate over a data structure, yielding one element at a time to whatever code block you’ve attached.
+Methods like each and map are called generators or iterators: they iterate over a data structure, yielding one element at a time to whatever code block you’ve attached.
 
 If you need to have the array indexes along with the array elements, use Enumerable#each_with_index.
 
@@ -403,15 +410,6 @@ numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 numbers.reverse_each {|x| puts x }
 ```
 
-The map method acts just like collect, but instead of creating a new array to hold the return values of its calls to the code block, it replaces each item in the old array with the corresponding value from the code block. This saves memory and time, but it destroys the old array
-```ruby
-students = %w(John Suresh Casey)
-puts students[0].object_id
-puts students.collect! { |x| x.upcase }
-puts students[0].object_id
-puts students.map! { |x| x.downcase }
-puts students[0].object_id
-```
 Like most other programming languages, Ruby lets you define for, while, and until loops—but you shouldn’t need them very often. The for construct is equivalent to each, whether it’s applied to an array or a range:
 ```ruby
 students = %w(John Suresh Casey)
@@ -430,7 +428,7 @@ The while and until constructs take a boolean expression and execute the loop wh
 ```ruby
 names = ['John', 'Suresh', 'Casey']
 
-for index in (0...names.length)
+for index in (0...names.length) # the "..." is a range. more on that in a moment
   puts "At position #{index}: #{names[index]}"
 end
 
@@ -470,13 +468,13 @@ my_array << 4 # this will cause an error
 ```ruby
 # Write a program that accepts a comma-separated sequence of words as input and prints the words in a comma-separated 
 # sequence after sorting them alphabetically. 
-# Suppose the following input is supplied to the program: without, hello, bag, world
-# Then, the output should be: bag, hello, without, world
+# Suppose the following input is supplied to the program: 'without, hello, bag, world'
+# Then, the output should be: 'bag, hello, without, world'
 ```
 
 ## Range
 
-A [`Range`](http://ruby-doc.org/core-2.5.1/Range.html) allows you to define a range of values. You can then turn that range into an array and get all the sweet array methods. This is a great technique to avoid for loops. you can use three dots instead of two for an exclusive range.
+A [`Range`](http://ruby-doc.org/core-2.5.1/Range.html) allows you to define a range of values. You can then turn that range into an array and get all the sweet array methods. This is a great technique to avoid `for loops`. you can use three dots instead of two for an exclusive range.
 ```ruby
 (1..10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 (1...10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -588,7 +586,7 @@ end
 
 ## Methods
 
-In Ruby everything is a [`Method`](https://ruby-doc.org/core-2.5.1/Method.html).  There are NO functions!
+In Ruby every function is a [`Method`](https://ruby-doc.org/core-2.5.1/Method.html).
 
 
 ```ruby
@@ -668,13 +666,13 @@ end
 We also have single-line ifs
 
 ```ruby
-puts 'you are old!' if age >= 100
+puts 'you are wise!' if age >= 100
 ```
 
 You may even see `unless`
 
 ```ruby
-puts 'you are old!' unless age < 100
+puts 'you are wise!' unless age < 100
 ```
 When you see an `unless foo`, read it as `if !foo`
 
@@ -715,14 +713,6 @@ nil || 2 # => 2 (truthy)
 false || nil # => nil (falsy)
 ```
 
-## Error-handling
-
-In Ruby we have `raise` to throw errors and `rescue` to catch them.
-
-These are most common when using and creating external APIs but probably don't need to be used in your own internal code.
-
-If you are interested flex your google muscles and learn it on your own ;)
-
 ## Style Things
 
 The Ruby community is very opinionated about styling.  As you are starting out, you MUST follow [these rules](https://github.com/bbatsov/ruby-style-guide).
@@ -732,7 +722,7 @@ Here are the most important rules
 **Casing**
 
 * All variables and methods must use `snake_case`
-* All classes and modules must use `CamelCase`
+* All classes and modules must use `PascalCase`
 * All constants (besides classes and modules) must use `SCREAMING_SNAKE_CASE`
 
 **Blocks**
@@ -748,12 +738,7 @@ Here are the most important rules
   * These are called _predicate methods_
 * A method ending in `!` should be a _dangerous_ version of the method sans `!`
   * _dangerous_ means either that it can mutate the object _or_ that can raise an error
-* Don't name methods like `get_foo`, `set_foo`. They should be `foo` and `foo=`
-* **Do** use `attr_reader` and `attr_writer`
 * Do not use parens when calling a method without args
-  * `super` is one possible exception
-* **Do** use parens for every method except for DSLs (and a small list of other common methods)
-  * `attr_reader`, `puts`, `require`, `include`, `it`, `has_many`, ...
 
 
 ## Resources
