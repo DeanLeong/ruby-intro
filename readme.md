@@ -307,12 +307,6 @@ When you see an `unless foo`, read it as `if !foo`
 
 > `if !foo` can always be written as `unless foo` which creates a more readable line
 
-## Exercise:
-
-```ruby
-// ======================add something here===============================
-```
-
 ## Arrays
 
 A Ruby [`Array`](https://ruby-doc.org/core-2.5.1/Array.html) is similar to a JS Array.
