@@ -130,7 +130,9 @@ s.slice!(5,6) # Deletion. Same as s[5,6]="". Returns deleted substring
 s.eql?("hello world") # True. Same as ==
 ```
 
-### There are several methods for querying the length of a string:
+#### There are several methods for querying the length of a string:
+<details>
+  <summary>Click to expand!</summary>
 
 ```ruby
 s.length # => 5: counts characters in 1.9, bytes in 1.8
@@ -138,9 +140,15 @@ s.size # => 5: size is a synonym
 s.bytesize # => 5: length in bytes; Ruby 1.9 only
 s.empty? # => false
 "".empty? # => true
-```
 
-### Finding the position of a substring or pattern match
+```
+</details>
+
+
+#### Finding the position of a substring or pattern match
+
+<details>
+  <summary>Click to expand!</summary>
 - String methods for searching a string and for replacing content include the following:
 
 ```ruby
@@ -153,29 +161,48 @@ s.index('Ruby') # => nil: search string not found
 s.rindex('l') # => 3: index of rightmost l in string
 s.rindex('l',2) # => 2: index of rightmost l in string at or before 2
 ```
+</details>
 
-### Checking for prefixes and suffixes
+#### Checking for prefixes and suffixes
+
+<details>
+  <summary>Click to expand!</summary>
 
 ```ruby
 s.start_with? "hell" # => true. Note singular "start" not "starts"
 s.end_with? "bells" # => false
 ```
 
-## Testing for presence of substring
+</details>
+
+#### Testing for presence of substring
+
+<details>
+  <summary>Click to expand!</summary>
 
 ```ruby
 s.include?("ll") # => true: "hello" includes "ll"
 s.include?(?H) # => false: "hello" does not include character H
 ```
 
-### Pattern matching with regular expressions
+</details>
+
+#### Pattern matching with regular expressions
+
+<details>
+  <summary>Click to expand!</summary>
 
 ```ruby
 s =~ /[aeiou]{2}/ # => nil: no double vowels in "hello"
 s.match(/[aeiou]/) {|m| m.to_s} # => "e": return first vowel
 ```
 
-## Splitting a string into substrings based on a delimiter string or pattern
+</details>
+
+#### Splitting a string into substrings based on a delimiter string or pattern
+
+<details>
+  <summary>Click to expand!</summary>
 
 ```ruby
 "this is it".split # => ["this", "is", "it"]: split on spaces by default
@@ -183,7 +210,13 @@ s.match(/[aeiou]/) {|m| m.to_s} # => "e": return first vowel
 "1, 2,3".split(/,\s*/) # => ["1","2","3"]: comma and optional space delimiter
 ```
 
-### Split a string into two parts plus a delimiter
+</details>
+
+#### Split a string into two parts plus a delimiter
+
+<details>
+  <summary>Click to expand!</summary>
+
 - These methods always return arrays of 3 strings:
 
 ```ruby
@@ -192,7 +225,12 @@ s.match(/[aeiou]/) {|m| m.to_s} # => "e": return first vowel
 "a123b".partition(/\d+/) # => ["a", "123", "b"]: works with Regexps, too
 ```
 
-### Interpolation
+</details>
+
+#### Interpolation
+
+<details>
+  <summary>Click to expand!</summary>
 
 To interpolate strings in Ruby, you must use double quotes
 
@@ -201,7 +239,13 @@ To interpolate strings in Ruby, you must use double quotes
 'I have #{13 * 4} cards' # => 'I have #{13 * 4} cards'
 ```
 
-### Concatenation
+</details>
+
+
+#### Concatenation
+
+<details>
+  <summary>Click to expand!</summary>
 
 You can also concatenate strings but this is NOT recommend
 
@@ -213,133 +257,61 @@ You can also concatenate strings but this is NOT recommend
 
 Above we see that we can NOT implicitly convert a non-string into a string (unlike what we have seen in JS).
 
+</details>
+
+## Exercise:
+
+```Ruby
+# If we are given a string of comma separated ingredients to add into
+# an `ingredients` table, how do we turn the string into an array of
+# just the individual ingredients?
+# Example: "flour, sugar, butter, milk, cream"
+```
+
+
+<br/>
 Use single quotes for strings that are not interpolated
 
-## Symbols
+## Control Flow
 
-A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`, except that it's is used represent _things_ rather than _text_.  Symbols start with `:`.
+Ruby and JS (and many languages) have similar control flow patterns.
+
+### `if`/`elsif`/`else` and ternary
+
 
 ```ruby
-:foo # => :foo
-:foo == :foo # => true
-:foo == :bar # => false
-:foo == 'foo' # false
+def number_message(num)
+  if num < 10
+    puts 'what a small number'
+  elsif num > 10
+    puts 'That is a big number!'
+  else
+    puts 'That number is just right!'
+  end
+end
 ```
 
-The more you see them the more you will understand the use-case.
-Symbols use memory more efficiently
-```ruby
-string1 = 'hello'
-string2 = 'hello'
-symbol1 = :hello
-symbol2 = :hello
-
-string1.object_id #=> 1234
-string2.object_id #=> 4567
-
-symbol1.object_id #=> 7890
-symbol2.object_id #=> 7890
-```
-
-Confused? Don't worry. We are primarily only going to come across symbols in real life as the **key** name in a key / value pair: { name: "brian" }
-
-## Booleans
-
-Of course Ruby has two booleans `true` and `false`
-
-Each object has a `==` method that compares to another object.
+#### `if` / `unless`
+We also have single-line ifs
 
 ```ruby
-1 == 1 # => true
-1 == '1' # => false
-1 == 1.0 # => true
-[1, 2] == [1, 2] # => true
-[1, 2] == [2, 1] # => false
-{a: 1, b: 2} == {b: 2, a: 1} # => true
+puts 'you are wise!' if age >= 100
 ```
 
-> Do NOT use `===`. This is not the same as what it means in JS.
-
-### Truthy and Falsy
-
-Ruby only has **two** falsy values: `nil` and `false`.
-
-So unlike JS `0` and `''` are truthy.  (There is no `null`, `undefined`, `NaN`, `-0`)
+You may even see `unless`
 
 ```ruby
-!! false # => false
-!! nil # => false
-
-!! 0 # => true
-!! '' # => true
+puts 'you are wise!' unless !(age >= 100)
 ```
+When you see an `unless foo`, read it as `if !foo`
 
-## Local Variables
-A local variable has a local scope or context. If defined within a method, for example, its scope is kept within that method. Local variable names must begin with either a lowercase letter or an underscore (_), and must not be prefixed with @, @@, or $ because they are reserved for other types of variables. Following are a few examples of local variables:
+> `if !foo` can always be written as `unless foo` which creates a more readable line
+
+## Exercise:
 
 ```ruby
-x = 1.0    # x is a Float
-y = "Yes"  # y is a String
-_temp = 16 # _temp is a Integer
-``` 
-
-## Instance Variables
-An instance variable belongs to a particular instance of a class, hence the name. It can only be accessed from outside that instance via an accessor (helper) method. Instance variables are always prefixed with a single at sign (@), as in @hello.
-
-## Class Variables
-A class variable is shared among all instances of a class. Only one copy of a class variable exists for a given class. It is prefixed by two at signs (@@), such as @@times. You have to initialize (declare a value for) a class variable before you use it.
-
-## Global Variables
-Global variables are globally available to a program, inside any structure. Their scope is the whole program. They are prefixed by a dollar sign ($), such as $amount.
-
-
-## Boolean States, Boolean Objects, and nil
-
-Every expression in Ruby evaluates to an object, and every object has a Boolean value of either true or false. Furthermore, true and false are objects. This idea isn’t as convoluted as it sounds. If true and false weren’t objects, then a pure Boolean expression like
-
+// ======================add something here===============================
 ```
-100 > 80
-```
-
-would have no object to evaluate to. (And > is a method and therefore has to return an object.)
-
-In many cases where you want to get at a truth/falsehood value, such as an if statement or a comparison between two numbers, you don’t have to manipulate these special objects directly. In such situations, you can think of truth and falsehood as states, rather than objects.
-
-## The special object nil
-
-The special object nil is, indeed, an object (it’s the only instance of a class called NilClass). But in practice, it’s also a kind of nonobject. The Boolean value of nil is false, but that’s just the start of its nonobjectness.
-
-nil denotes an absence of anything. You can see this graphically when you inquire into the value of, for example, an instance variable you haven’t initialized:
-
-```ruby
-puts @x
-```
-
-This command prints an empty string and returns nil. (If you try this with a local variable, you’ll get an error; local variables aren’t automatically initialized to anything, not even nil.) nil is also the default value for nonexistent elements of container and collection objects. For example, if you create an array with three elements, and then you try to access the tenth element (at index 9, because array indexing starts at 0), you’ll find that it’s nil:
-
-```ruby
-["one","two","three"][9]
- => nil 
-```
-
-nil is sometimes a difficult object to understand. It’s all about absence and nonexistence; but nil does exist, and it responds to method calls like other objects:
-
-```ruby
-nil.to_s
- => "" 
-nil.to_i
- => 0 
-nil.object_id
- => 8 
-```
-
-The to_s conversion of nil is an empty string (""); the integer representation of nil is 0; and nil’s object ID is 8. (nil has no special relationship to 8; that just happens to be the number designated as its ID.)
-
-It’s not accurate to say that nil is empty, because doing so would imply that it has characteristics and dimension, like a number or a collection, which it isn’t supposed to. Trying to grasp nil can take you into some thorny philosophical territory. You can think of nil as an object that exists and that comes equipped with a survival kit of methods but that serves the purpose of representing absence and a state of being undetermined.
-
-Coming full circle, remember that nil has a Boolean value of false. nil and false are the only two objects that do. They’re not the only two expressions that do; 100 < 50 has a Boolean value of false, because it evaluates to the object false. But nil and false are the only two objects in Ruby with a Boolean value of false. All other Ruby objects—numbers, strings, instances of MyCoolClass—have a Boolean value of true. Tested directly, they all pass the if test.
-
-Boolean values and testing provide a segue into the next topic: comparisons between objects. We’ll look at tests involving two objects and ways of determining whether they’re equal—and, if they aren’t, whether they can be ranked as greater/lesser, and based on what criteria.
 
 ## Arrays
 
@@ -379,74 +351,10 @@ We can also concatenate arrays
 # (this is a new array. neither is mutated)
 ```
 
-## Iterating over an array
+#### Creating an array that cannot be modified
 
-Ruby supports for loops and the other iteration constructs found in most modern programming languages, but its preferred idiom is a code block fed to an method like each or collect.
-
-```ruby
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-numbers.each { |x| p x }
-```
-If you want to produce a new array based on a transformation of some other array, use `.map` along with a block that takes one element and transforms it:
-```ruby
-numbers = [1,2,3]
-numbers_two = numbers.map {|x| x+1 }
-p numbers_two
-```
-Methods like each and map are called generators or iterators: they iterate over a data structure, yielding one element at a time to whatever code block you’ve attached.
-
-If you need to have the array indexes along with the array elements, use Enumerable#each_with_index.
-
-```ruby
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-numbers.each_with_index do |item, index|
-  puts "At position #{index}: #{item}"
-end
-```
-To iterate over a list in reverse order, use the reverse_each method:
-```ruby
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-numbers.reverse_each {|x| puts x }
-```
-
-Like most other programming languages, Ruby lets you define for, while, and until loops—but you shouldn’t need them very often. The for construct is equivalent to each, whether it’s applied to an array or a range:
-```ruby
-students = %w(John Suresh Casey)
-for element in students
-  puts element
-end
-```
-
-```ruby
-students = %w(John Suresh Casey)
-students.each { |element|
-  puts element
-}
-```
-The while and until constructs take a boolean expression and execute the loop while the expression is true (while)or until it becomes true (until). All three of the following code snippets generate the same output:
-```ruby
-names = ['John', 'Suresh', 'Casey']
-
-for index in (0...names.length) # the "..." is a range. more on that in a moment
-  puts "At position #{index}: #{names[index]}"
-end
-
-index = 0
-while index < names.length
-  puts "At position #{index}: #{names[index]}"
-  index += 1
-end
-
-index = 0
-until index == names.length
-  puts "At position #{index}: #{names[index]}"
-  index += 1
-end
-```
-- <b>Note</b> These constructs don’t make for very idiomatic Ruby. You should only need to use them when you’re iterating over a data structure in a way that doesn’t already have an iterator method. 
-
-## Creating an array that cannot be modified
+<details>
+  <summary>Click to expand!</summary>
 
 - This can come in handy when we want to limit the size of an array or prevent further modification. The freeze function can be used on objects other than arrays with the same result:
 ```ruby
@@ -455,22 +363,7 @@ my_array.freeze
 my_array << 4 # this will cause an error
 ```
 
-## Team Exercise 1
-
-```ruby
-# Write a program that prints the number of times the string 'bob' occurs in s. For example, if s = 'azcbobobegghakl',
-# then your program should print 
-# Number of times bob occurs is: 2
-```
-
-## Team Exercise 2
-
-```ruby
-# Write a program that accepts a comma-separated sequence of words as input and prints the words in a comma-separated 
-# sequence after sorting them alphabetically. 
-# Suppose the following input is supplied to the program: 'without, hello, bag, world'
-# Then, the output should be: 'bag, hello, without, world'
-```
+</details>
 
 ## Range
 
@@ -480,53 +373,20 @@ A [`Range`](http://ruby-doc.org/core-2.5.1/Range.html) allows you to define a ra
 (1...10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-## Hashes
-
-A [`Hash`](https://ruby-doc.org/core-2.5.1/Hash.html) is similar to a JS object.
+## Exercise:
 
 ```ruby
-gustave = { 'name' => 'Gustave', 'age' => 2.5 }
-gustave['name'] # => 'Gustave'
-gustave['foo'] # => nil
+# Create an array that includes all integers between 1 to 100.
+# Use the `.shuffle!` method to shuffle the array
+# check the last value in the array and print "odd" or "even
+# in terminal accordingly
 ```
-
-We use ONLY bracket notation to get and set values
-
-```ruby
-gustave['age'] # => 2.5
-gustave.age # => NoMethodError: undefined method `age' for Hash
-
-gustave['age'] = 10
-gustave['age'] # => 10
-
-gustave.age = 25 # => NoMethodError: undefined method `age=' for Hash
-```
-
-By convention, `Hash` keys are usually `Symbol`s not `String`s
-
-```ruby
-gustave = { :name => 'Gustave', :age => 24 }
-gustave[:name] # => 'Gustave'
-gustave['name'] # => nil
-```
-
-Since using symbols as keys is so common, there is a nice short-hand
-
-This is exactly the same as what we saw above.
-
-```ruby
-gustave = { name: 'Gustave', age: 24 }
-```
-
-Notice that is looks exactly like a JS object except the keys are symbols, not strings.
-
-
 ## Iteration
 
 In JS if we wanted to print numbers 0 through 3 we would:
 
 ```javascript
-for(var i = 0; i < 3; i++) {
+for(let i = 0; i < 3; i++) {
   console.log(i);
 }
 // > 0
@@ -583,6 +443,133 @@ end
 # > the value of b is 2
 # > the value of c is 3
 ```
+
+If you need to have the array indexes along with the array elements, use Enumerable#each_with_index.
+
+```ruby
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+numbers.each_with_index do |item, index|
+  puts "At position #{index}: #{item}"
+end
+```
+To iterate over a list in reverse order, use the reverse_each method:
+```ruby
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+numbers.reverse_each {|x| puts x }
+```
+
+Like most other programming languages, Ruby lets you define for, while, and until loops—but you shouldn’t need them very often. The for construct is equivalent to each, whether it’s applied to an array or a range:
+```ruby
+students = ['Katelyn','Shay','Misha','David']
+for element in students
+  puts element
+end
+```
+
+```ruby
+students = ['Katelyn','Shay','Misha','David']
+students.each { |element|
+  puts element
+}
+```
+The while and until constructs take a boolean expression and execute the loop while the expression is true (while)or until it becomes true (until). All three of the following code snippets generate the same output:
+```ruby
+names = ['John', 'Suresh', 'Casey']
+
+for index in (0...names.length) 
+  puts "At position #{index}: #{names[index]}"
+end
+
+index = 0
+while index < names.length
+  puts "At position #{index}: #{names[index]}"
+  index += 1
+end
+
+index = 0
+until !(index < names.length)
+  puts "At position #{index}: #{names[index]}"
+  index += 1
+end
+```
+- <b>Note</b> These constructs don’t make for very idiomatic Ruby. You should only need to use them when you’re iterating over a data structure in a way that doesn’t already have an iterator method. 
+
+## Exercise:
+
+```ruby
+# Make a program that prints out in terminal every 10th number from
+# 10 to 2,000. When the number reaches a whole thousand, you should
+# shorten the output to include 'k'. (i.e. "1k", "2k")
+```
+
+## Symbols
+
+A [Symbol](https://ruby-doc.org/core-2.5.1/Symbol.html) is similar to a `String`, except that it's is used represent _things_ rather than _text_.  Symbols start with `:`.
+
+```ruby
+:foo # => :foo
+:foo == :foo # => true
+:foo == :bar # => false
+:foo == 'foo' # false
+```
+
+The more you see them the more you will understand the use-case.
+Symbols use memory more efficiently
+```ruby
+string1 = 'hello'
+string2 = 'hello'
+symbol1 = :hello
+symbol2 = :hello
+
+string1.object_id #=> 1234
+string2.object_id #=> 4567
+
+symbol1.object_id #=> 7890
+symbol2.object_id #=> 7890
+```
+
+Confused? Don't worry. We are primarily only going to come across symbols in real life as the **key** name in a key / value pair: { name: "brian" }
+
+## Hashes
+
+A [`Hash`](https://ruby-doc.org/core-2.5.1/Hash.html) is similar to a JS object.
+
+```ruby
+gustave = { 'name' => 'Gustave', 'age' => 2.5 }
+gustave['name'] # => 'Gustave'
+gustave['foo'] # => nil
+```
+
+We use ONLY bracket notation to get and set values
+
+```ruby
+gustave['age'] # => 2.5
+gustave.age # => NoMethodError: undefined method `age' for Hash
+
+gustave['age'] = 10
+gustave['age'] # => 10
+
+gustave.age = 25 # => NoMethodError: undefined method `age=' for Hash
+```
+
+By convention, `Hash` keys are usually `Symbol`s not `String`s
+
+```ruby
+gustave = { :name => 'Gustave', :age => 24 }
+gustave[:name] # => 'Gustave'
+gustave['name'] # => nil
+```
+
+Since using symbols as keys is so common, there is a nice short-hand
+
+This is exactly the same as what we saw above.
+
+```ruby
+gustave = { name: 'Gustave', age: 24 }
+```
+
+Notice that is looks exactly like a JS object except the keys are symbols, not strings.
 
 ## Methods
 
@@ -641,63 +628,53 @@ We called the method without using parens!
 
 ### Bonus: [defining methods that `yield` blocks](blocks.md)
 
-
-
-## Control Flow
-
-Ruby and JS (and many languages) have similar control flow patterns.
-
-### `if`/`elsif`/`else` and ternary
-
+## Exercise:
 
 ```ruby
-def number_message(num)
-  if num < 10
-    puts 'what a small number'
-  elsif num > 10
-    puts 'That is a big number!'
-  else
-    puts 'That number is just right!'
-  end
-end
+# Write a program that prints the number of times the string 'bob' occurs in s. For example, if s = 'azcbobobegghakl',
+# then your program should print 
+# Number of times bob occurs is: 2
 ```
 
-#### `if` / `unless`
-We also have single-line ifs
+## Exercise:
 
 ```ruby
-puts 'you are wise!' if age >= 100
+# Write a program that accepts a comma-separated sequence of words as input and prints the words in a comma-separated 
+# sequence after sorting them alphabetically. 
+# Suppose the following input is supplied to the program: 'without, hello, bag, world'
+# Then, the output should be: 'bag, hello, without, world'
 ```
 
-You may even see `unless`
+## Booleans
+
+Of course Ruby has two booleans `true` and `false`
+
+Each object has a `==` method that compares to another object.
 
 ```ruby
-puts 'you are wise!' unless age < 100
+1 == 1 # => true
+1 == '1' # => false
+1 == 1.0 # => true
+[1, 2] == [1, 2] # => true
+[1, 2] == [2, 1] # => false
+{a: 1, b: 2} == {b: 2, a: 1} # => true
 ```
-When you see an `unless foo`, read it as `if !foo`
 
-> `if !foo` can always be written as `unless foo` which creates a more readable line
+> Do NOT use `===`. This is not the same as what it means in JS.
 
+### Truthy and Falsy
 
-#### Ternary operator  
+Ruby only has **two** falsy values: `nil` and `false`.
 
-A ternary operator looks just like we have seen in JS
+So unlike JS `0` and `''` are truthy.  (There is no `null`, `undefined`, `NaN`, `-0`)
 
 ```ruby
-num.even? ? "#{num} is even!" : "#{num} is odd!"
+!! false # => false
+!! nil # => false
+
+!! 0 # => true
+!! '' # => true
 ```
-
-### `while` loops
-
-```ruby
-a = 10
-while a.positive?
-  puts a
-  a -= 1
-end
-```
-
-> There are also `until` loops. While is to `until` as `if` is to `unless`
 
 ### Binary operators `&&`/`||`
 
@@ -711,6 +688,14 @@ nil && 2 # => nil (falsy)
 1 || nil # => 1 (truthy)
 nil || 2 # => 2 (truthy)
 false || nil # => nil (falsy)
+```
+
+#### Ternary operator  
+
+A ternary operator looks just like we have seen in JS
+
+```ruby
+num.even? ? "#{num} is even!" : "#{num} is odd!"
 ```
 
 ## Style Things
